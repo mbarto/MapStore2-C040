@@ -26,7 +26,7 @@
         "title":"BASE_CARTOGRAFICA",
         "group": "background",
         "type":"wms",
-        "url":"/geoserver-test/wms",
+        "url":"/geoserver/wms",
         "bbox":
           {
           "crs":"EPSG:4326",
@@ -87,14 +87,14 @@
       }, {
 				"id": "V_VINC_SOPRAINT",
 				"search": {
-					"url": "/geoserver-test/wfs",
+					"url": "/geoserver/wfs",
 					"type": "wfs"
 				},
 				"name": "CORSO_1:V_VINC_SOPRAINT",
 				"opacity": 1,
 				"title": "Vincoli",
 				"type": "wms",
-				"url": "/geoserver-test/ows",
+				"url": "/geoserver/ows",
 				"bbox": {
 					"crs": "EPSG:4326",
 					"bounds": {
