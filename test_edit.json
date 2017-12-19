@@ -85,14 +85,14 @@
           }
         ]
       }, {
-				"id": "V_VINC_SOPRAINT",
+				"id": "AMBIENTE:TEST",
 				"search": {
 					"url": "/geoserver/wfs",
 					"type": "wfs"
 				},
-				"name": "CORSO_1:V_VINC_SOPRAINT",
+				"name": "AMBIENTE:TEST",
 				"opacity": 1,
-				"title": "Vincoli",
+				"title": "Test layer",
 				"type": "wms",
 				"url": "/geoserver/ows",
 				"bbox": {
