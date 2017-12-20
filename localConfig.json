@@ -15,7 +15,7 @@
     "urlPattern": ".*geostore.*",
     "method": "bearer"
   }, {
-    "urlPattern": "\\/geoserver\\-test.*",
+    "urlPattern": "\\/geoserver/.*",
     "authkeyParamName": "ms2-authkey",
     "method": "authkey"
   }],
@@ -54,7 +54,7 @@
           "selectedService": "GeoPortale Comune di Genova",
           "services": {
             "GeoPortale Comune di Genova": {
-              "url": "/geoserver/csw",
+              "url": "/geoserver/ows",
               "type": "csw",
               "title": "GeoPortale Comune di Genova",
               "autoload": true

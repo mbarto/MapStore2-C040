@@ -90,7 +90,7 @@
 					"url": "/geoserver/wfs",
 					"type": "wfs"
 				},
-				"name": "CORSO_1:V_VINC_SOPRAINT",
+				"name": "AMBIENTE:TEST",
 				"opacity": 1,
 				"title": "Vincoli",
 				"type": "wms",
