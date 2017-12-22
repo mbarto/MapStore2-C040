@@ -12,5 +12,5 @@
   "typology": "cantiere",
   "geometry_name": "GEOMETRY",
   "elementsLayerName": "MEDIATORE:V_ELEMENTI_CANTIERI",
-  "areasLayerName": "SITGEO:V_AREE_CANTIERE"
+  "areasLayerName": "CANTIERI:AREE_CANTIERE"
 }

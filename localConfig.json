@@ -4,7 +4,7 @@
   "wmsURL": "/geoserver/wms",
   "proxyUrl": {
     "url": "/MapStore2/proxy/?url=",
-    "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org", "http://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.11:8080"]
+    "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org", "http://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.1:8080", "http://192.168.153.11:8080"]
   },
   "bingApiKey": "AhuXBu7ipR1gNbBfXhtUAyCZ6rkC5PkWpxs2MnMRZ1ZupxQfivjLCch22ozKSCAn",
   "translationsPath": ["MapStore2/web/client/translations", "translations"],
@@ -281,6 +281,23 @@
                 "regex": {
                   "attribute": "COD_CONTROLLO",
                   "typeName": "CORSO_1:V_VINC_SOPRAINT"
+                },
+                "editor": "AddressesEditor",
+                "editorProps": {
+                  "filterProps":{
+                    "blacklist": ["via", "piazza", "viale"],
+                    "maxFeatures": 3,
+                    "queriableAttributes": ["DESVIA"],
+                    "predicate": "ILIKE",
+                    "typeName": "SITGEO:CIVICI_COD_TOPON",
+                    "valueField": "CODICE_CONTROLLO",
+                    "returnFullData": true
+                  }
+                }
+              },{
+                "regex": {
+                  "attribute": "AMBITO_INT",
+                  "typeName": "AMBIENTE:TEST"
                 },
                 "editor": "AddressesEditor",
                 "editorProps": {
