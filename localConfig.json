@@ -685,7 +685,7 @@
             "displayName": "${properties.NOMEVIA}",
             "subTitle": " (seleziona per cercare numero civico)",
             "options": {
-              "url": "/geoserver-test/wfs",
+              "url": "/geoserver/wfs",
               "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
               "queriableAttributes": ["NOMEVIA"],
               "sortBy": "ID",
@@ -704,7 +704,7 @@
               "options": {
                 "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
                 "sortBy": "NUMERO",
-                "url": "/geoserver-test/wfs",
+                "url": "/geoserver/wfs",
                 "typeName": "SITGEO:CIVICI_COD_TOPON",
                 "queriableAttributes": ["TESTO"],
                 "srsName": "EPSG:4326",
