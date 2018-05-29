@@ -259,7 +259,7 @@
           "additionalLayers": [
             {
               "type": "wms",
-              "url": "/geoserver/TEST/wms",
+              "url": "/geoserver/SITGEO/wms",
               "visibility": true,
               "title": "Elevation",
               "name": "elevation",

@@ -128,21 +128,46 @@ module.exports = {
     devServer: {
         proxy: {
             '/rest/geostore': {
-                target: "http://mappe.comune.genova.it"
+                target: "https://mappe.comune.genova.it/MapStore2/",
+                secure: false,
+                headers: {
+                    host: "mappe.comune.genova.it"
+                }
             },
             '/MapStore2/proxy': {
-                target: "http://mappe.comune.genova.it"
+                target: "https://mappe.comune.genova.it",
+                secure: false,
+                headers: {
+                    host: "mappe.comune.genova.it"
+                }
             },
             '/geoserver/': {
-                target: "http://mappe.comune.genova.it"
+                target: "https://mappe.comune.genova.it",
+                secure: false,
+                headers: {
+                    host: "mappe.comune.genova.it"
+                }
             },
             '/geoserver-test/': {
-                target: "http://vm-linuxgeofetest.comune.genova.it"
+                target: "https://mappe.comune.genova.it",
+                secure: false,
+                headers: {
+                    Host: "mappe.comune.genova.it"
+                }
             },
             '/geonetwork': {
-                target: "http://mappe.comune.genova.it"
+                target: "https://mappe.comune.genova.it",
+                secure: false,
+                headers: {
+                    host: "mappe.comune.genova.it"
+                }
             },
             '/geofence': {
+                target: "https://mappe.comune.genova.it",
+                secure: false,
+                headers: {
+                    host: "mappe.comune.genova.it"
+                }
             }
         }
     },
