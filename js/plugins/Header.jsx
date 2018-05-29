@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 var React = require('react');
-
+const src = require('../../assets/img/logo.jpg');
 var assign = require('object-assign');
 var Header = React.createClass({
     propTypes: {
@@ -24,11 +24,16 @@ var Header = React.createClass({
 
 module.exports = {
     HeaderPlugin: assign(Header, {
-        OmniBar: {
-            name: 'header',
-            position: 0,
-            tool: true,
-            priority: 1
+        NavMenu: {
+            tool: (props) => ({
+                position: 0,
+                className: "logo-full",
+                label: props.label || 'Comune di Genova',
+                href: props.href || 'https://www.comune.genova.it/',
+                style: {padding: '0 15px'},
+                img: props.src && <img className="logo" src={props.src} /> || <img className="customer-logo" src={src} height="30" />,
+                logo: true
+            })
         }
     })
 };

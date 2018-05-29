@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
@@ -35,6 +35,7 @@ module.exports = {
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
         LoginPlugin: require('./plugins/Login'),
         OmniBarPlugin: require('../MapStore2/web/client/plugins/OmniBar'),
+        CookiePlugin: require('../MapStore2/web/client/plugins/Cookie'),
         BurgerMenuPlugin: require('../MapStore2/web/client/plugins/BurgerMenu'),
         UndoPlugin: require('../MapStore2/web/client/plugins/History'),
         RedoPlugin: require('../MapStore2/web/client/plugins/History'),
@@ -45,6 +46,9 @@ module.exports = {
         UserManagerPlugin: require('../MapStore2/web/client/plugins/manager/UserManager'),
         GroupManagerPlugin: require('../MapStore2/web/client/plugins/manager/GroupManager'),
         RulesManagerPlugin: require('../MapStore2/web/client/plugins/manager/RulesManager'),
+        RulesDataGridPlugin: require('../MapStore2/web/client/plugins/RulesDataGrid'),
+        RulesManagerFooter: require('../MapStore2/web/client/plugins/RulesManagerFooter'),
+        RulesEditorPlugin: require('../MapStore2/web/client/plugins/RulesEditor'),
         ManagerMenuPlugin: require('../MapStore2/web/client/plugins/manager/ManagerMenu'),
         RedirectPlugin: require('../MapStore2/web/client/plugins/Redirect'),
         SharePlugin: require('../MapStore2/web/client/plugins/Share'),
@@ -62,13 +66,22 @@ module.exports = {
         HeaderPlugin: require('./plugins/Header'),
         FooterPlugin: require('./plugins/Footer'),
         AttributionPlugin: require('./plugins/Attribution'),
+        PrivacyNote: require('./plugins/PrivacyNote'),
         FeatureLoader: require('./plugins/FeatureLoader'),
         NotificationsPlugin: require('../MapStore2/web/client/plugins/Notifications'),
         FeatureEditorPlugin: require('../MapStore2/web/client/plugins/FeatureEditor'),
         AutoMapUpdatePlugin: require('../MapStore2/web/client/plugins/AutoMapUpdate'),
         DetailsPlugin: require('../MapStore2/web/client/plugins/Details'),
+        Dashboard: require('../MapStore2/web/client/plugins/Dashboard'),
+        DashboardEditor: require('../MapStore2/web/client/plugins/DashboardEditor'),
         WidgetsPlugin: require('../MapStore2/web/client/plugins/Widgets'),
-        WidgetsBuilderPlugin: require('../MapStore2/web/client/plugins/WidgetsBuilder')
+        WidgetsBuilderPlugin: require('../MapStore2/web/client/plugins/WidgetsBuilder'),
+        TOCItemsSettingsPlugin: require('../MapStore2/web/client/plugins/TOCItemsSettings'),
+        FeaturedMaps: require('../MapStore2/web/client/plugins/FeaturedMaps'),
+        NavMenu: require('../MapStore2/web/client/product/plugins/NavMenu'),
+        FloatingLegend: require('../MapStore2/web/client/plugins/FloatingLegend'),
+        Dashboards: require('../MapStore2/web/client/plugins/Dashboards'),
+        ContentTabs: require('../MapStore2/web/client/plugins/ContentTabs')
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,
