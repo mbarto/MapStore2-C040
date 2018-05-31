@@ -1,6 +1,6 @@
 {
   "geoserverUrl": "/geoserver/ows",
-  "serviceRESTUrl": "http://192.168.153.1:8080/LFS/rest/cantiere",
+  "serviceRESTUrl": "https://appaltige.comune.genova.it/LFS/rest/cantiere",
   "toolbar": {
       "activeTools": ["elementsGrid", "pointSelection"],
       "inactiveTools": ["areasGrid", "polygonSelection"]
