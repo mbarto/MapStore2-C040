@@ -2,9 +2,14 @@
   "geoStoreUrl": "rest/geostore/",
   "printUrl": "/geoserver/pdf/info.json",
   "wmsURL": "/geoserver/wms",
+  "geoFenceUrl": "/",
+  "geoFenceGeoServerInstance": {
+    "url": "/geoserver/",
+    "id": 5
+  },
   "proxyUrl": {
     "url": "/MapStore2/proxy/?url=",
-    "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org", "http://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.1:8080", "http://192.168.153.11:8080"]
+    "useCORS": ["https://nominatim.openstreetmap.org", "https://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.1:8080", "http://192.168.153.11:8080", "https://appaltige.comune.genova.it"]
   },
   "bingApiKey": "AhuXBu7ipR1gNbBfXhtUAyCZ6rkC5PkWpxs2MnMRZ1ZupxQfivjLCch22ozKSCAn",
   "translationsPath": ["MapStore2/web/client/translations", "translations"],
@@ -42,6 +47,9 @@
         }],
   "initialState": {
     "defaultState": {
+      "maptype": {
+        "mapType": "{context.mode === 'embedded' ? 'leaflet' : 'openlayers'}"
+      },
       "catalog":{
         "default": {
           "newService": {
@@ -77,6 +85,14 @@
     "mobile": [{
         "name": "Map",
         "cfg": {
+          "mapOptions": {
+            "openlayers": {
+              "interactions": {
+                "altShiftDragRotate": false,
+                "pinchRotate": false
+              }
+            }
+          },
           "tools": ["locate"]
         }
       }, "Version", "DrawerMenu",
@@ -113,7 +129,12 @@
             "alwaysVisible": true
           }
         }
-            }, "Home", {"name": "TOC", "cfg": {"showFullTitleOnExpand": true, "activateMetedataTool": false }}, {
+            }, "Home", {"name": "TOC", "cfg": {"showFullTitleOnExpand": true, "activateMetedataTool": false }},{
+              "name": "TOCItemsSettings",
+              "cfg": {
+                "width": 300
+              }
+            }, {
         "name": "Tutorial",
         "cfg": {
           "preset": "default_mobile_tutorial"
@@ -209,6 +230,10 @@
         "cfg":{
           "mapOptions": {
             "openlayers": {
+              "interactions": {
+                "altShiftDragRotate": false,
+                "pinchRotate": false
+              },
               "view": {
                 "minZoom": 10,
                 "extent": [
@@ -230,7 +255,19 @@
             "scalebar": {
               "container" : "#mapstore-map-footer-container"
             }
-          }
+          },
+          "additionalLayers": [
+            {
+              "type": "wms",
+              "url": "/geoserver/SITGEO/wms",
+              "visibility": true,
+              "title": "Elevation",
+              "name": "elevation",
+              "format": "application/bil16",
+              "useForElevation": true,
+              "hidden": true
+            }
+          ]
         }
       }, "HelpLink", "Share", "Details", "DrawerMenu", {
         "name": "BackgroundSelector",
@@ -239,27 +276,17 @@
         }
       },
       {
-          "name": "Identify",
-          "cfg": {
-              "panelClassName": "mapstore-right-panel modal-content",
-              "glyph": "info-sign",
-              "draggable": false,
-              "collapsible": true,
-              "viewerOptions": {
-                  "container": "{context.ReactSwipe}",
-                  "header": "{context.SwipeHeader}",
-                  "draggable": false,
-                  "collapsible": false,
-                  "headerOptions": {
-                      "useButtons": true
-                  }
-              }
-          },
-          "override": {
-            "Toolbar": {
-                "position": 11
-            }
+        "name": "Identify",
+        "cfg": {
+          "viewerOptions": {
+            "container": "{context.ReactSwipe}"
           }
+        },
+        "override": {
+          "Toolbar": {
+            "position": 11
+          }
+        }
       },
       "Attribution",
       {
@@ -392,6 +419,10 @@
             {
               "name": "dxf-zip",
               "label": "dxf-zip"
+            },
+            {
+              "name": "application/json",
+              "label": "GeoJSON"
             }
           ],
           "srsList": [
@@ -423,7 +454,7 @@
             }
           }
         }
-      },
+      }, "TOCItemsSettings",
       {
         "name": "Tutorial",
         "cfg": {
@@ -499,6 +530,7 @@
       }, {
         "name": "MousePosition",
         "cfg": {
+          "showElevation": true,
           "editCRS": true,
           "showLabels": true,
           "showToggle": true,
@@ -510,7 +542,7 @@
             }
           }
         }
-      }, "MapFooter", {
+      }, "MapFooter", "PrivacyNote", {
         "name": "Search",
         "cfg": {
           "searchOptions": {
@@ -602,7 +634,15 @@
           }
         }
       },
-      "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",  "Widgets", "WidgetsBuilder"
+      "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen",
+      "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",  "Widgets", "WidgetsBuilder",
+      {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl": "http://www.comune.genova.it/content/note-legali-e-privacy",
+          "declineUrl": "http://www.google.com"
+        }
+      }
     ],
     "embedded": [{
         "name": "Map",
@@ -754,6 +794,10 @@
           "tools": ["locate", "draw", "highlight"],
           "mapOptions": {
             "openlayers": {
+              "interactions": {
+                "altShiftDragRotate": false,
+                "pinchRotate": false
+              },
               "attribution": {
                 "container": "#mapstore-map-footer-container"
               }
@@ -880,23 +924,197 @@
         "name": "Header",
         "hide": true
       },
-      "MapSearch",
+      {
+        "name": "MapSearch"
+      },
       {
         "name": "CreateNewMap",
         "cfg": {
           "allowedRoles": ["ADMIN"]
         }
       },
-      "Maps",
+      "NavMenu",
+      "FeaturedMaps",
+      "ContentTabs",
+      {
+        "name": "Maps",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 12
+          },
+          "fluid": true
+        }
+      },
+      {
+        "name": "Dashboards",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 12
+          },
+          "fluid": true
+        }
+      },{
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl": "http://www.comune.genova.it/content/note-legali-e-privacy",
+          "declineUrl": "http://www.google.com"
+        }
+      },
       "Footer"
     ],
-    "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"],
+    "manager": ["Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"],
+    "rulesmanager": [
+      "Redirect",
+      {
+        "name": "OmniBar",
+        "cfg": {
+          "containerPosition": "header",
+          "className": "navbar shadow navbar-home"
+        }
+      },
+      {
+        "name": "Home",
+        "override": {
+          "OmniBar": {
+            "position": 1,
+            "priority": 1
+          }
+        }
+      },
+      "ManagerMenu",
+      "Login",
+      "NavMenu",
+      {
+        "name": "Header",
+        "hide": true
+      },
+      "RulesDataGrid",
+      "Notifications",
+      {
+        "name": "RulesEditor",
+        "cfg": {
+          "containerPosition": "columns"
+        }
+      }
+    ],
+    "dashboard": [
+      {
+        "name": "OmniBar",
+        "cfg": {
+          "containerPosition": "header",
+          "className": "navbar shadow navbar-home"
+        }
+      },
+      "ManagerMenu",
+      "Login",
+      {
+        "name": "DashboardEditor",
+        "cfg": {
+          "catalog": {
+            "url": "/geoserver/csw",
+            "type": "csw",
+            "title": "Demo CSW Service",
+            "autoload": true
+          },
+          "containerPosition": "columns"
+        }
+      },
+      {
+        "name": "QueryPanel",
+        "cfg": {
+          "containerPosition": "columns"
+        }
+      },
+      "Dashboard",
+      "NavMenu",
+      {
+        "name": "Header",
+        "hide": true
+      },
+      "Notifications", "Home", {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl": "http://www.comune.genova.it/content/note-legali-e-privacy",
+          "declineUrl": "http://www.google.com"
+        }
+      }
+    ],
     "cantieri": [{
       "name": "Map",
       "cfg" :{
-          "mapType": "openlayers",
-          "tools": ["measurement", "locate", "draw", "highlight"]
+        "mapOptions": {
+          "openlayers": {
+            "interactions": {
+              "altShiftDragRotate": false,
+              "pinchRotate": false
+            }
+          }
+        },
+        "mapType": "openlayers",
+        "tools": ["measurement", "locate", "draw", "highlight"]
       }
-    }, "Notifications", "LavoriPubblici", "BackgroundSelector"]
+    }, "Notifications", "LavoriPubblici",
+        {
+      "name": "Search",
+      "cfg": {
+        "searchOptions": {
+          "services": [
+                {
+                  "type": "wfs",
+                  "priority": 6,
+                  "displayName": "${properties.NOMEVIA}",
+                  "subTitle": " (seleziona per cercare numero civico)",
+                  "options": {
+                    "url": "/geoserver/wfs",
+                    "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
+                    "queriableAttributes": [
+                      "NOMEVIA"
+                    ],
+                    "sortBy": "ID",
+                    "srsName": "EPSG:4326",
+                    "maxFeatures": 20,
+                    "blacklist": [
+                      "via",
+                      "viale",
+                      "piazza"
+                    ]
+                  },
+                  "nestedPlaceholder": "Digita numero civico o località",
+                  "then": [
+                    {
+                      "type": "wfs",
+                      "priority": 1,
+                      "displayName": "${properties.DESVIA} ${properties.TESTO}",
+                      "subTitle": " (ricerca numero civico)",
+                      "searchTextTemplate": "${properties.TESTO}",
+                      "options": {
+                        "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
+                        "url": "/geoserver/wfs",
+                        "typeName": "SITGEO:CIVICI_COD_TOPON",
+                        "queriableAttributes": [
+                          "TESTO"
+                        ],
+                        "srsName": "EPSG:4326",
+                        "maxFeatures": 10
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "nominatim",
+                  "searchTextTemplate": "${properties.display_name}",
+                  "priority": 5,
+                  "options": {
+                    "polygon_geojson": 1,
+                    "limit": 3
+                  }
+                }
+              ]
+            }
+          }
+        },
+         "BackgroundSelector"]
   }
 }

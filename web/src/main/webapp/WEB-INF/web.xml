@@ -77,7 +77,7 @@
     <context-param>
         <param-name>people.sirac.error.returnURL</param-name>
         <!-- Production -->
-        <param-value>http://mappe.comune.genova.it/MapStore2</param-value>
+        <param-value>https://mappe.comune.genova.it/MapStore2</param-value>
         <!-- Test -->
         <!--  <param-value>http://vm-linuxgeofetest.comune.genova.it/MapStore2</param-value> -->
     </context-param>
@@ -125,7 +125,7 @@
         <!-- Test -->
         <!-- <param-value>http://vm-linuxgeofetest.comune.genova.it</param-value> -->
         <!-- Production -->
-        <param-value>http://mappe.comune.genova.it</param-value>
+        <param-value>https://mappe.comune.genova.it</param-value>
     </context-param>
 
     <filter>

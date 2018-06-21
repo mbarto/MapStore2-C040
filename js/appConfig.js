@@ -28,7 +28,7 @@ module.exports = {
          name: "mapviewer",
          path: "/viewer/:mapType/:mapId",
          component: require('./pages/MapViewer')
-     }, {
+    }, {
          name: "manager",
          path: "/manager",
          component: require('./pages/Manager')
@@ -36,6 +36,18 @@ module.exports = {
          name: "manager",
          path: "/manager/:tool",
          component: require('./pages/Manager')
+     }, {
+         name: "dashboard",
+         path: "/dashboard",
+         component: require('../MapStore2/web/client/product/pages/Dashboard')
+     }, {
+         name: "dashboard",
+         path: "/dashboard/:did",
+         component: require('../MapStore2/web/client/product/pages/Dashboard')
+     }, {
+         name: "rulesmanager",
+         path: "/rules-manager",
+         component: require('../MapStore2/web/client/product/pages/RulesManager')
      }],
      pluginsDef: require('./plugins.js'),
      initialState: {
