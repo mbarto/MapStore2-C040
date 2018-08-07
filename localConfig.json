@@ -729,48 +729,60 @@
         "name": "Search",
         "cfg": {
           "withToggle": ["max-width: 768px", "min-width: 768px"],
-          "services": [{
-            "type": "wfs",
-            "priority": 6,
-            "displayName": "${properties.NOMEVIA}",
-            "subTitle": " (seleziona per cercare numero civico)",
-            "options": {
-              "url": "/geoserver/wfs",
-              "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
-              "queriableAttributes": ["NOMEVIA"],
-              "sortBy": "ID",
-              "srsName": "EPSG:4326",
-              "startIndex": 0,
-              "maxFeatures": 20,
-              "blacklist": ["via", "viale", "piazza"]
-            },
-            "nestedPlaceholder": "Digita numero civico o località",
-            "then": [{
-              "type": "wfs",
-              "priority": 1,
-              "displayName": "${properties.DESVIA} ${properties.TESTO}",
-              "subTitle": " (ricerca numero civico)",
-              "searchTextTemplate": "${properties.TESTO}",
-              "options": {
-                "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
-                "sortBy": "NUMERO",
-                "url": "/geoserver/wfs",
-                "typeName": "SITGEO:CIVICI_COD_TOPON",
-                "queriableAttributes": ["TESTO"],
-                "srsName": "EPSG:4326",
-                "maxFeatures": 30,
-                "startIndex": 0
+          "searchOptions":
+            {
+              "services": [
+              {
+                "type": "wfs",
+                "priority": 6,
+                "displayName": "${properties.NOMEVIA}",
+                "subTitle": " (seleziona per cercare numero civico)",
+                "options": {
+                  "url": "/geoserver/wfs",
+                  "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
+                  "queriableAttributes": [
+                    "NOMEVIA"
+                  ],
+                  "sortBy": "ID",
+                  "srsName": "EPSG:4326",
+                  "maxFeatures": 20,
+                  "blacklist": [
+                    "via",
+                    "viale",
+                    "piazza"
+                  ]
+                },
+                "nestedPlaceholder": "Digita numero civico o località",
+                "then": [
+                  {
+                    "type": "wfs",
+                    "priority": 1,
+                    "displayName": "${properties.DESVIA} ${properties.TESTO}",
+                    "subTitle": " (ricerca numero civico)",
+                    "searchTextTemplate": "${properties.TESTO}",
+                    "options": {
+                      "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
+                      "url": "/geoserver/wfs",
+                      "typeName": "SITGEO:CIVICI_COD_TOPON",
+                      "queriableAttributes": [
+                        "TESTO"
+                      ],
+                      "srsName": "EPSG:4326",
+                      "maxFeatures": 10
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "nominatim",
+                "searchTextTemplate": "${properties.display_name}",
+                "priority": 5,
+                "options": {
+                  "polygon_geojson": 1,
+                  "limit": 3
+                }
               }
-            }]
-          }, {
-            "type": "nominatim",
-            "searchTextTemplate": "${properties.display_name}",
-            "priority": 5,
-            "options": {
-              "polygon_geojson": 1,
-              "limit": 3
-            }
-          }]
+            ]}
         }
       }, {
         "name": "Toolbar",
