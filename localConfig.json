@@ -9,12 +9,20 @@
   "wmsURL": "/geoserver-test/wms",
   "proxyUrl": {
     "url": "/MapStore2/proxy/?url=",
-    "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org", "http://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.11:8080"]
+    "useCORS": [
+      "http://nominatim.openstreetmap.org",
+      "https://nominatim.openstreetmap.org",
+      "http://mappe.comune.genova.it",
+      "http://vm-linuxgeofetest.comune.genova.it",
+      "http://www.realvista.it/",
+      "http://192.168.153.11:8080"
+    ]
   },
   "bingApiKey": "AhuXBu7ipR1gNbBfXhtUAyCZ6rkC5PkWpxs2MnMRZ1ZupxQfivjLCch22ozKSCAn",
   "translationsPath": ["MapStore2/web/client/translations", "translations"],
   "mapquestApiKey": "__API_KEY_MAPQUEST__",
   "initialMapFilter": "",
+  "loadAfterTheme": true,
   "useAuthenticationRules": true,
   "authenticationRules": [{
     "urlPattern": ".*geostore.*",
@@ -24,6 +32,14 @@
     "authkeyParamName": "ms2-authkey",
     "method": "authkey"
   }],
+  "mapConstraints": {
+    "minZoom": 10,
+    "crs": "EPSG:3857",
+    "restrictedExtent": [
+      939258.2034374997, 5479006.186718751,
+      1017529.7203906253, 5557277.703671876
+    ]
+  },
   "defaultMapOptions": {
     "cesium": {
       "navigationTools": true,
@@ -150,6 +166,7 @@
       },
        {
         "name": "Search",
+        "showOptions": false,
         "cfg": {
           "withToggle": ["max-width: 768px", "min-width: 768px"],
           "searchOptions": {
@@ -234,13 +251,6 @@
                 "altShiftDragRotate": false,
                 "pinchRotate": false
               },
-              "view": {
-                "minZoom": 10,
-                "extent": [
-                  939258.2034374997, 5479006.186718751,
-                  1017529.7203906253, 5557277.703671876
-                ]
-              },
               "attribution": {
                 "container": "#mapstore-map-footer-container"
               }
@@ -269,7 +279,7 @@
             }
           ]
         }
-      }, "HelpLink", "Share", "Details", "DrawerMenu", {
+      }, "Share", "Details", "DrawerMenu", "Version", {
         "name": "BackgroundSelector",
         "cfg": {
           "bottom": "30px"
@@ -278,6 +288,7 @@
       {
         "name": "Identify",
         "cfg": {
+          "enabledCoordEditorButton": false,
           "viewerOptions": {
             "container": "{context.ReactSwipe}"
           }
@@ -421,12 +432,13 @@
           "activateQueryTool": true,
           "activateMetedataTool": false,
           "activateAddLayerButton": true,
+          "activateAddGroupButton": true,
           "showFullTitleOnExpand": true,
           "spatialMethodOptions": [
-                  {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
-                  {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
-                  {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
-              ],
+            {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
+            {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
+            {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
+          ],
           "layerOptions": {
             "legendOptions": {
               "legendContainerStyle": {
@@ -438,7 +450,7 @@
             }
           }
         }
-      }, "TOCItemsSettings", "ThematicLayer",
+      }, "AddGroup", "TOCItemsSettings", "ThematicLayer",
       {
         "name": "Tutorial",
         "cfg": {
@@ -487,7 +499,15 @@
           }
         }
       },
-      "Measure",
+      "MapImport", "MapExport",
+      {
+        "name":"Measure",
+        "cfg": {
+          "defaultOptions": {
+            "showCoordinateEditor": false
+          }
+        }
+      },
       {
         "name": "Print",
         "cfg": {
@@ -497,7 +517,7 @@
              "enableRefresh": false
            }
          }
-      }, "ShapeFile", {
+      }, {
         "name": "Settings",
         "cfg": {
           "wrap": true,
@@ -532,6 +552,7 @@
       }, "MapFooter", "PrivacyNote", {
         "name": "Search",
         "cfg": {
+          "showCoordinatesSearchOption": false,
           "searchOptions": {
             "services": [{
               "type": "wfs",
@@ -621,8 +642,11 @@
           }
         }
       },
+      "WidgetsBuilder", "Widgets", "WidgetsTray",
+      "FeedbackMask",
       "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen",
-      "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",  "Widgets", "WidgetsBuilder",
+      "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",
+
       {
         "name": "Cookie",
         "cfg": {
@@ -672,6 +696,7 @@
       }, {
         "name": "Identify",
         "cfg": {
+          "enabledCoordEditorButton": false,
           "showFullscreen": true,
                     "position": "bottom",
                     "size": 0.5,
@@ -707,6 +732,7 @@
 
         }, "MapFooter", {
         "name": "Search",
+        "showCoordinatesSearchOption": false,
         "cfg": {
           "withToggle": ["max-width: 768px", "min-width: 768px"],
           "searchOptions": {
@@ -775,7 +801,8 @@
             "alwaysVisible": true
           }
         }
-      }
+      },
+      "FeedbackMask"
     ],
     "featureviewer": [{
         "name": "Map",
@@ -1039,9 +1066,10 @@
         }
       }
     ],
-    "cantieri": [{
+    "cantieri": ["FeedbackMask", {
       "name": "Map",
       "cfg" :{
+        "shouldLoadFont": false,
         "mapOptions": {
           "openlayers": {
             "interactions": {
@@ -1057,6 +1085,7 @@
         {
       "name": "Search",
       "cfg": {
+        "showOptions": false,
         "searchOptions": {
           "services": [
                 {
