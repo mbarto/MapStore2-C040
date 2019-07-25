@@ -41,6 +41,20 @@ const config = require('./MapStore2/build/buildConfig')(
                 host: "mappe.comune.genova.it"
             }
         },
+        '/pdf': {
+            target: "https://mappe.comune.genova.it/MapStore2",
+            secure: false,
+            headers: {
+                host: "mappe.comune.genova.it"
+            }
+        },
+        '/MapStore2/pdf': {
+            target: "https://mappe.comune.genova.it",
+            secure: false,
+            headers: {
+                host: "mappe.comune.genova.it"
+            }
+        },
         '/geoserver/': {
             target: "https://mappe.comune.genova.it",
             secure: false,
