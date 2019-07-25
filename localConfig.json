@@ -9,12 +9,21 @@
   },
   "proxyUrl": {
     "url": "/MapStore2/proxy/?url=",
-    "useCORS": ["https://nominatim.openstreetmap.org", "https://mappe.comune.genova.it", "http://vm-linuxgeofetest.comune.genova.it", "http://www.realvista.it/", "http://192.168.153.1:8080", "http://192.168.153.11:8080", "https://appaltige.comune.genova.it"]
+    "useCORS": [
+      "https://nominatim.openstreetmap.org",
+      "https://mappe.comune.genova.it",
+      "http://vm-linuxgeofetest.comune.genova.it",
+      "http://www.realvista.it/",
+      "http://192.168.153.1:8080",
+      "http://192.168.153.11:8080",
+      "https://appaltige.comune.genova.it"
+    ]
   },
   "bingApiKey": "AhuXBu7ipR1gNbBfXhtUAyCZ6rkC5PkWpxs2MnMRZ1ZupxQfivjLCch22ozKSCAn",
   "translationsPath": ["MapStore2/web/client/translations", "translations"],
   "mapquestApiKey": "__API_KEY_MAPQUEST__",
   "initialMapFilter": "",
+  "loadAfterTheme": true,
   "useAuthenticationRules": true,
   "authenticationRules": [{
     "urlPattern": ".*geostore.*",
@@ -24,6 +33,14 @@
     "authkeyParamName": "ms2-authkey",
     "method": "authkey"
   }],
+  "mapConstraints": {
+    "minZoom": 10,
+    "crs": "EPSG:3857",
+    "restrictedExtent": [
+      939258.2034374997, 5479006.186718751,
+      1017529.7203906253, 5557277.703671876
+    ]
+  },
   "defaultMapOptions": {
     "cesium": {
       "navigationTools": true,
@@ -70,11 +87,18 @@
           }
         }
       },
-        "wfsdownload": {
-          "downloadOptions":{
-            "singlePage": false
-          }
+      "wfsdownload": {
+        "downloadOptions":{
+          "singlePage": false
         }
+      },
+      "mapInfo": {
+        "enabled": true,
+        "disabledAlwaysOn": false,
+        "configuration": {
+          "infoFormat": "text/html"
+        }
+      }
     }
   },
    "monitorState": [
@@ -114,13 +138,14 @@
         "name": "Identify",
         "showIn": ["Settings"],
         "cfg": {
-          	"showFullscreen": true,
-		"position": "bottom",
-		"size": 0.5,
-		"fluid": true,
-		"viewerOptions": {
-			"container": "{context.ReactSwipe}"
-		}
+          "enabledCoordEditorButton": false,
+          "showFullscreen": true,
+      		"position": "bottom",
+      		"size": 0.5,
+      		"fluid": true,
+      		"viewerOptions": {
+      			"container": "{context.ReactSwipe}"
+      		}
         }
       }, {
         "name": "Locate",
@@ -151,6 +176,7 @@
        {
         "name": "Search",
         "cfg": {
+          "showOptions": false,
           "withToggle": ["max-width: 768px", "min-width: 768px"],
           "searchOptions": {
             "services": [{
@@ -234,13 +260,6 @@
                 "altShiftDragRotate": false,
                 "pinchRotate": false
               },
-              "view": {
-                "minZoom": 10,
-                "extent": [
-                  939258.2034374997, 5479006.186718751,
-                  1017529.7203906253, 5557277.703671876
-                ]
-              },
               "attribution": {
                 "container": "#mapstore-map-footer-container"
               }
@@ -269,7 +288,7 @@
             }
           ]
         }
-      }, "HelpLink", "Share", "Details", "DrawerMenu", {
+      }, "Share", "Details", "DrawerMenu", "Version", {
         "name": "BackgroundSelector",
         "cfg": {
           "bottom": "30px"
@@ -278,6 +297,7 @@
       {
         "name": "Identify",
         "cfg": {
+          "enabledCoordEditorButton": false,
           "viewerOptions": {
             "container": "{context.ReactSwipe}"
           }
@@ -438,12 +458,13 @@
           "activateQueryTool": true,
           "activateMetedataTool": false,
           "activateAddLayerButton": true,
+          "activateAddGroupButton": true,
           "showFullTitleOnExpand": true,
           "spatialMethodOptions": [
-                  {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
-                  {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
-                  {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
-              ],
+            {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
+            {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
+            {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
+          ],
           "layerOptions": {
             "legendOptions": {
               "legendContainerStyle": {
@@ -455,7 +476,7 @@
             }
           }
         }
-      }, "TOCItemsSettings", "ThematicLayer",
+      }, "AddGroup", "TOCItemsSettings", "ThematicLayer",
       {
         "name": "Tutorial",
         "cfg": {
@@ -497,14 +518,22 @@
               },
               {
                 "translation": "identifyButton",
-                "selector": "#identifyBar-container",
+                "selector": "#navigationBar-container .glyphicon.glyphicon-option-horizontal",
                 "position": "top"
               }
             ]
           }
         }
       },
-      "Measure",
+      "MapImport", "MapExport",
+      {
+        "name":"Measure",
+        "cfg": {
+          "defaultOptions": {
+            "showCoordinateEditor": false
+          }
+        }
+      },
       {
         "name": "Print",
         "cfg": {
@@ -512,9 +541,12 @@
            "mapPreviewOptions": {
              "enableScalebox": true,
              "enableRefresh": false
+           },
+           "overrideOptions": {
+             "geodetic": true
            }
          }
-      }, "ShapeFile", {
+      }, {
         "name": "Settings",
         "cfg": {
           "wrap": true,
@@ -549,6 +581,7 @@
       }, "MapFooter", "PrivacyNote", {
         "name": "Search",
         "cfg": {
+          "showCoordinatesSearchOption": false,
           "searchOptions": {
             "services": [{
               "type": "wfs",
@@ -638,8 +671,11 @@
           }
         }
       },
+      "WidgetsBuilder", "Widgets", "WidgetsTray",
+      "FeedbackMask",
       "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen",
-      "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",  "Widgets", "WidgetsBuilder",
+      "GlobeViewSwitcher", "SearchServicesConfig", "AutoMapUpdate",
+
       {
         "name": "Cookie",
         "cfg": {
@@ -689,13 +725,14 @@
       }, {
         "name": "Identify",
         "cfg": {
+          "enabledCoordEditorButton": false,
           "showFullscreen": true,
-                    "position": "bottom",
-                    "size": 0.5,
-                    "fluid": true,
-                    "viewerOptions": {
-                        "container": "{context.ReactSwipe}"
-                    },
+            "position": "bottom",
+            "size": 0.5,
+            "fluid": true,
+            "viewerOptions": {
+                "container": "{context.ReactSwipe}"
+            },
           "glyph": "info-sign"
         }
       }, {
@@ -724,62 +761,53 @@
 
         }, "MapFooter", {
         "name": "Search",
+        "showCoordinatesSearchOption": false,
         "cfg": {
           "withToggle": ["max-width: 768px", "min-width: 768px"],
-          "searchOptions":
-            {
-              "services": [
-              {
-                "type": "wfs",
-                "priority": 6,
-                "displayName": "${properties.NOMEVIA}",
-                "subTitle": " (seleziona per cercare numero civico)",
-                "options": {
-                  "url": "/geoserver/wfs",
-                  "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
-                  "queriableAttributes": [
-                    "NOMEVIA"
-                  ],
-                  "sortBy": "ID",
-                  "srsName": "EPSG:4326",
-                  "maxFeatures": 20,
-                  "blacklist": [
-                    "via",
-                    "viale",
-                    "piazza"
-                  ]
-                },
-                "nestedPlaceholder": "Digita numero civico o località",
-                "then": [
-                  {
-                    "type": "wfs",
-                    "priority": 1,
-                    "displayName": "${properties.DESVIA} ${properties.TESTO}",
-                    "subTitle": " (ricerca numero civico)",
-                    "searchTextTemplate": "${properties.TESTO}",
-                    "options": {
-                      "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
-                      "url": "/geoserver/wfs",
-                      "typeName": "SITGEO:CIVICI_COD_TOPON",
-                      "queriableAttributes": [
-                        "TESTO"
-                      ],
-                      "srsName": "EPSG:4326",
-                      "maxFeatures": 10
-                    }
-                  }
-                ]
+          "searchOptions": {
+            "services": [{
+              "type": "wfs",
+              "priority": 6,
+              "displayName": "${properties.NOMEVIA}",
+              "subTitle": " (seleziona per cercare numero civico)",
+              "options": {
+                "url": "/geoserver/wfs",
+                "typeName": "SITGEO:V_ASTE_STRADALI_TOPONIMO_SUB",
+                "queriableAttributes": ["NOMEVIA"],
+                "sortBy": "ID",
+                "srsName": "EPSG:4326",
+                "startIndex": 0,
+                "maxFeatures": 20,
+                "blacklist": ["via", "viale", "piazza" ]
               },
-              {
-                "type": "nominatim",
-                "searchTextTemplate": "${properties.display_name}",
-                "priority": 5,
+              "nestedPlaceholder": "Digita numero civico o località",
+              "then": [{
+                "type": "wfs",
+                "priority": 1,
+                "displayName": "${properties.DESVIA} ${properties.TESTO}",
+                "subTitle": " (ricerca numero civico)",
+                "searchTextTemplate": "${properties.TESTO}",
                 "options": {
-                  "polygon_geojson": 1,
-                  "limit": 3
+                  "staticFilter": " AND COD_STRADA = '${properties.COD_STRADA}'",
+                  "sortBy": "NUMERO",
+                  "url": "/geoserver/wfs",
+                  "typeName": "SITGEO:CIVICI_COD_TOPON",
+                  "queriableAttributes": ["TESTO"],
+                  "srsName": "EPSG:4326",
+                  "maxFeatures": 30,
+                  "startIndex": 0
                 }
+              }]
+            }, {
+              "type": "nominatim",
+              "searchTextTemplate": "${properties.display_name}",
+              "priority": 5,
+              "options": {
+                "polygon_geojson": 1,
+                "limit": 3
               }
-            ]}
+            }
+          ]}
         }
       }, {
         "name": "Toolbar",
@@ -802,7 +830,8 @@
             "alwaysVisible": true
           }
         }
-      }
+      },
+      "FeedbackMask"
     ],
     "featureviewer": [{
         "name": "Map",
@@ -844,6 +873,7 @@
       }, {
           "name": "Identify",
           "cfg": {
+              "enabledCoordEditorButton": false,
               "panelClassName": "mapstore-right-panel modal-content",
               "glyph": "info-sign",
               "draggable": false,
@@ -1041,6 +1071,10 @@
       {
         "name": "QueryPanel",
         "cfg": {
+          "toolsOptions": {
+            "hideCrossLayer": true,
+            "hideSpatialFilter": true
+          },
           "containerPosition": "columns"
         }
       },
@@ -1066,9 +1100,10 @@
         }
       }
     ],
-    "cantieri": [{
+    "cantieri": ["FeedbackMask", {
       "name": "Map",
       "cfg" :{
+        "shouldLoadFont": false,
         "mapOptions": {
           "openlayers": {
             "interactions": {
@@ -1084,6 +1119,7 @@
         {
       "name": "Search",
       "cfg": {
+        "showOptions": false,
         "searchOptions": {
           "services": [
                 {
