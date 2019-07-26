@@ -1,6 +1,8 @@
 {
     "locale": "en-US",
     "messages": {
+        "collapse": "Hide full description",
+        "expand": "Show full decription",
         "search": {
             "s_priority_info": "Used to sort search results, higher values first. Default services has priority 5 and 6"
         },
@@ -39,6 +41,14 @@
                 "modal": {
                     "closeButtonText": "Close"
                 }
+            }
+        },
+        "user": {
+            "spidLogin": "SPID Login"
+        },
+        "mapImport": {
+            "dropZone": {
+                "infoSupported": "<p><small>Supported configuration files: MapStore2 legacy format<br />Supported vector layer files: shapefiles (must be contained in zip archives), KML/KMZ, GeoJSON or GPX, reference systems Epsg: 3003, Epsg: 4326)</small></p>"
             }
         },
         "shapefile": {

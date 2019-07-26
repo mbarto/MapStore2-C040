@@ -1,6 +1,8 @@
 {
     "locale": "it-IT",
     "messages": {
+        "collapse": "Nascondi descrizione completa",
+        "expand": "Mostra descrizione completa",
         "search": {
             "s_priority_info": "Usato per ordinare i risultati, i valori più alti vengono visualizzati per primi. I servizi di default (ricerca strade/indirizzi e nominatim) hanno rispettivamente priorità 6 e 5"
         },
@@ -77,6 +79,14 @@
             "introCesium": {
                 "title": "Tutorial visualizzatore 3D",
                 "text": "Fai un breve tour delle funzionalità della mappa 3D cliccando su Avanti. Spunta la checkbox sotto per evitare di visualizzare questo messaggio tutte le volte che apri una mappa."
+            }
+        },
+        "user": {
+            "spidLogin": "SPID Login"
+        },
+        "mapImport": {
+            "dropZone": {
+                "infoSupported": "<p> <small> File di configurazione supportati: formato legacy di MapStore2<br /> File di livello vettoriale supportati: shapefile (devono essere contenuti in archivi zip), KML / KMZ, GPX o GeoJSON, sistemi di riferimento Epsg:3003, Epsg:4326 </small> </p>"
             }
         },
         "shapefile": {
