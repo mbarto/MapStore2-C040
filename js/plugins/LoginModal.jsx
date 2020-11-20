@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import {connect} from '@mapstore/utils/PluginsUtils';
-import {login, loginFail, resetError} from '@mapstore/actions/security';
-import {setControlProperty} from '@mapstore/actions/controls';
+import {connect} from '@mapstore/framework/utils/PluginsUtils';
+import {login, loginFail, resetError} from '@mapstore/framework/actions/security';
+import {setControlProperty} from '@mapstore/framework/actions/controls';
 
 const closeLogin = () => {
     return (dispatch) => {

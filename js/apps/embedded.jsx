@@ -11,33 +11,34 @@ const {createSelector} = require('reselect');
 const pages = [{
     name: "embedviewer",
     path: "/:mapId",
-    component: require('./pages/Embedded')
+    component: require('@js/pages/Embedded')
 }, {
     name: "viewer",
     path: "/featureviewer/:mapType/:layer/:cql_filter",
-    component: require('./pages/FeatureViewer')
+    component: require('@js/pages/FeatureViewer')
 }, {
     name: "mapviewer",
     path: "/viewer/:mapType/:mapId",
-    component: require('../MapStore2/web/client/product/pages/MapViewer')
+    component: require('@mapstore/framework/product/pages/MapViewer').default
 }, {
     name: "wmsviewer",
     path: "/wmsfeatureviewer/:mapType/:layer/:cql_filter",
-    component: require('./pages/FeatureViewer')
+    component: require('@js/pages/FeatureViewer')
 }];
 const routerSelector = createSelector(state => state.locale, (locale) => ({
     locale: locale || {},
     version: "no-version",
     themeCfg: {
-        theme: "comge"
+        theme: "comge",
+        path:  __MAPSTORE_PROJECT_CONFIG__.themePath
     },
     pages
 }));
-const StandardRouter = connect(routerSelector)(require('../MapStore2/web/client/components/app/StandardRouter').default);
+const StandardRouter = connect(routerSelector)(require('@mapstore/framework/components/app/StandardRouter').default);
 
-require('../MapStore2/web/client/product/main')(
-    require('./appConfigEmbedded'),
-    require('./apiPlugins.js'),
+require('@mapstore/framework/product/main').default(
+    require('@js/appConfigEmbedded'),
+    require('@js/apiPlugins.js'),
     (cfg) => ({
         ...cfg,
         appComponent: StandardRouter

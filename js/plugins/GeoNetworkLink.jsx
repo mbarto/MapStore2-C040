@@ -9,7 +9,7 @@
 const React = require('react');
 const assign = require('object-assign');
 const {Glyphicon, MenuItem} = require('react-bootstrap');
-const Message = require('../../MapStore2/web/client/components/I18N/Message');
+const Message = require('@mapstore/framework/components/I18N/Message').default;
 const geonetwork = require('../../assets/img/geonetwork.svg');
 
 const GeoNetworkLinkMenuItem = ({

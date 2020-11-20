@@ -9,8 +9,8 @@ const React = require('react');
 
 const {connect} = require('react-redux');
 
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const PluginsUtils = require('../../MapStore2/web/client/utils/PluginsUtils');
+const ConfigUtils = require('@mapstore/framework/utils/ConfigUtils').default;
+const PluginsUtils = require('@mapstore/framework/utils/PluginsUtils').default;
 const PropTypes = require('prop-types');
 
 const PluginsContainer = connect((state) => ({
@@ -18,7 +18,7 @@ const PluginsContainer = connect((state) => ({
     mode: "featureviewer",
     pluginsState: state && state.controls || {},
     monitoredState: PluginsUtils.filterState(state, ConfigUtils.getConfigProp('monitorState') || [])
-}))(require('../../MapStore2/web/client/components/plugins/PluginsContainer'));
+}))(require('@mapstore/framework/components/plugins/PluginsContainer').default);
 
 class MapViewer extends React.Component {
     static propTypes = {

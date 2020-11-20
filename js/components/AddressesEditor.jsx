@@ -7,7 +7,7 @@
 */
 const React = require('react');
 const PropTypes = require('prop-types');
-const AttributeEditor = require('../../MapStore2/web/client/components/data/featuregrid/editors/AttributeEditor');
+const AttributeEditor = require('@mapstore/framework/components/data/featuregrid/editors/AttributeEditor').default;
 const AddressesCombobox = require('./combobox/AddressesCombobox');
 const {createAddresses} = require('../observables/createAddressCodesStream');
 const assign = require('object-assign');

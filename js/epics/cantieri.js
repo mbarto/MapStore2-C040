@@ -6,20 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 const Rx = require('rxjs');
-const {CLICK_ON_MAP} = require('../../MapStore2/web/client/actions/map');
-const requestBuilder = require('../../MapStore2/web/client/utils/ogc/WFS/RequestBuilder');
-const transactionRequestBuilder = require('../../MapStore2/web/client/utils/ogc/WFST/RequestBuilder');
+const {CLICK_ON_MAP} = require('@mapstore/framework/actions/map');
+const requestBuilder = require('@mapstore/framework/utils/ogc/WFS/RequestBuilder');
+const transactionRequestBuilder = require('@mapstore/framework/utils/ogc/WFST/RequestBuilder');
 const {filter, and, property} = requestBuilder({wfsVersion: "1.1.0"});
 const {featureToRow, isSameFeature, checkFeature, uncheckFeature, getAreaFilter, isActiveTool,
     removeFeature, clearAllFeatures, getAreasLayer, getElementsLayer, getAreasGeometry,
     addFeaturesToElementLayer, showQueryElementsError, getElementsFilter, addFeatureToAreaLayer,
     replaceFeatures, getCheckedElementsFromLayer, getSmallestFeature, showTimeoutError
 } = require('../utils/CantieriUtils');
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const {addLayer, changeLayerProperties} = require('../../MapStore2/web/client/actions/layers');
-const {changeDrawingStatus, END_DRAWING} = require('../../MapStore2/web/client/actions/draw');
+const axios = require('@mapstore/framework/libs/ajax');
+const {addLayer, changeLayerProperties} = require('@mapstore/framework/actions/layers');
+const {changeDrawingStatus, END_DRAWING} = require('@mapstore/framework/actions/draw');
 
-const {reprojectGeoJson} = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const {reprojectGeoJson} = require('@mapstore/framework/utils/CoordinatesUtils');
 const {
     UPDATE_CHECKED_ELEMENTS, REMOVE_CANTIERI_AREA, RESET_CANTIERI_FEATURES,
     QUERY_ELEMENTS_FEATURES, ELEMENTS_LAYER, AREAS_LAYER, ROWS_SELECTED, ROWS_DESELECTED, SAVE_CANTIERI_DATA,
@@ -31,11 +31,11 @@ const {
     errorRemoveFeature, errorResetCantieriFeatures, errorDrawingAreas, errorLoadCantieriAreas
 } = require('../actions/notifications');
 
-const { MAP_CONFIG_LOADED } = require('../../MapStore2/web/client/actions/config');
-const { changeMousePositionState } = require('../../MapStore2/web/client/actions/mousePosition');
+const { MAP_CONFIG_LOADED } = require('@mapstore/framework/actions/config');
+const { changeMousePositionState } = require('@mapstore/framework/actions/mousePosition');
 const {serviceRESTUrlSelector} = require('../selector/cantieri');
 
-const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const FilterUtils = require('@mapstore/framework/utils/FilterUtils').default;
 const {transaction, describeFeatureType} = require('../api/WFST');
 const assign = require('object-assign');
 

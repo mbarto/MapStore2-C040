@@ -9,24 +9,25 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {startLoading, updateFeatureLoader} = require('./epics/featureloader');
-const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
+const {startLoading, updateFeatureLoader} = require('@js/epics/featureloader');
+const {ensureIntl} = require('@mapstore/framework/utils/LocaleUtils');
 const startApp = () => {
-    const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
-    const {pages, pluginsDef, initialState, storeOpts, printingEnabled} = require('./appConfigllpp');
+    const StandardApp = require('@mapstore/framework/components/app/StandardApp').default;
+    const {pages, pluginsDef, initialState, storeOpts, printingEnabled} = require('@js/appConfigllpp');
     const routerSelector = createSelector(state => state.locale, (locale) => ({
         locale: locale || {},
         version: "no-version",
         themeCfg: {
-            theme: "comge"
+            theme: "comge",
+            path:  __MAPSTORE_PROJECT_CONFIG__.themePath
         },
         pages
     }));
-    const StandardRouter = connect(routerSelector)(require('../MapStore2/web/client/components/app/StandardRouter').default);
-    const appStore = require('../MapStore2/web/client/stores/StandardStore').bind(null, initialState, {
+    const StandardRouter = connect(routerSelector)(require('@mapstore/framework/components/app/StandardRouter').default);
+    const appStore = require('@mapstore/framework/stores/StandardStore').default.bind(null, initialState, {
         mode: (state = 'embedded') => state,
-        maps: require('../MapStore2/web/client/reducers/maps'),
-        security: require('../MapStore2/web/client/reducers/security')
+        maps: require('@mapstore/framework/reducers/maps').default,
+        security: require('@mapstore/framework/reducers/security').default
     }, {
         "FEATUREVIEWER:startLoading": startLoading,
         "FEATUREVIEWER:updateFeatureLoader": updateFeatureLoader
@@ -46,7 +47,7 @@ const startApp = () => {
 };
 if (!global.Intl ) {
     // Ensure Intl is loaded, then call the given callback
-    LocaleUtils.ensureIntl(startApp);
+    ensureIntl(startApp);
 } else {
     startApp();
 }

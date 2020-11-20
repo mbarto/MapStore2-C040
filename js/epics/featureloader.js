@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 const {STARTLOADING, UPDATE, startFeatureLoader} = require('../actions/featureloader');
-const {resetControls} = require('../../MapStore2/web/client/actions/controls');
-const {zoomToExtent} = require('../../MapStore2/web/client/actions/map');
-const {configureMap, configureError} = require('../../MapStore2/web/client/actions/config');
-const {addLayer, removeLayer} = require('../../MapStore2/web/client/actions/layers');
+const {resetControls} = require('@mapstore/framework/actions/controls');
+const {zoomToExtent} = require('@mapstore/framework/actions/map');
+const {configureMap, configureError} = require('@mapstore/framework/actions/config');
+const {addLayer, removeLayer} = require('@mapstore/framework/actions/layers');
 const Rx = require('rxjs');
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/framework/libs/ajax');
 const bbox = require('@turf/bbox');
 
 const WMS_ID = "FEATURE_SELECTOR_WMS";

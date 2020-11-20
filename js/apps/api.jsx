@@ -10,14 +10,14 @@ const getScriptPath = () => {
     return scriptEl && scriptEl.src && scriptEl.src.substring(0, scriptEl.src.lastIndexOf('/')) || 'https://dev.mapstore2.geo-solutions.it/mapstore/dist';
 };
 
-const MapStore2 = require('../MapStore2/web/client/jsapi/MapStore2')
-    .withPlugins(require('./apiPlugins'), {
+const MapStore2 = require('@mapstore/framework/jsapi/MapStore2')
+    .withPlugins(require('@js/apiPlugins'), {
         theme: {
             theme: 'comge',
-            path: getScriptPath() + '/themes'
+            path:  __MAPSTORE_PROJECT_CONFIG__.themePath || getScriptPath() + '/themes'
         },
         noLocalConfig: true,
-        initialState: require('./appConfigEmbedded').initialState,
-        translations: require('./appConfigEmbedded').translations
+        initialState: require('@js/appConfigEmbedded').initialState,
+        translations: require('@js/appConfigEmbedded').translations
     });
 window.MapStore2 = MapStore2;

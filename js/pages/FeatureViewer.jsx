@@ -7,12 +7,12 @@
  */
 const React = require('react');
 const PropTypes = require('prop-types');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('@mapstore/framework/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {loadMapConfig} = require('../../MapStore2/web/client/actions/config');
-const {resetControls} = require('../../MapStore2/web/client/actions/controls');
+const ConfigUtils = require('@mapstore/framework/utils/ConfigUtils').default;
+const {loadMapConfig} = require('@mapstore/framework/actions/config');
+const {resetControls} = require('@mapstore/framework/actions/controls');
 const {startFeatureLoader, updateFeatureLoader} = require('../actions/featureloader');
 
 const MapViewer = require('../containers/FeatureViewer');

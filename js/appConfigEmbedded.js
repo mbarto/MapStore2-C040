@@ -5,8 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const {startLoading, updateFeatureLoader} = require('./epics/featureloader');
-const {addCustomViewer} = require('./epics/initCustomEditors');
+const {startLoading, updateFeatureLoader} = require('@js/epics/featureloader');
+const {addCustomViewer} = require('@js/epics/initCustomEditors');
 
 module.exports = {
     mode: 'embedded',
@@ -14,21 +14,21 @@ module.exports = {
     pages: [{
         name: "embedviewer",
         path: "/:mapId",
-        component: require('./pages/Embedded')
+        component: require('@js/pages/Embedded')
     }, {
         name: "viewer",
         path: "/featureviewer/:mapType/:layer/:cql_filter",
-        component: require('./pages/FeatureViewer')
+        component: require('@js/pages/FeatureViewer')
     }, {
         name: "mapviewer",
         path: "/viewer/:mapType/:mapId",
-        component: require('../MapStore2/web/client/product/pages/MapViewer')
+        component: require('@mapstore/framework/product/pages/MapViewer').default
     }, {
         name: "wmsviewer",
         path: "/wmsfeatureviewer/:mapType/:layer/:cql_filter",
-        component: require('./pages/FeatureViewer')
+        component: require('@js/pages/FeatureViewer')
     }],
-    pluginsDef: require('./apiPlugins'),
+    pluginsDef: require('@js/apiPlugins'),
     translations: ["MapStore2/web/client/translations", "translations"],
     initialState: {
         defaultState: {
@@ -83,9 +83,9 @@ module.exports = {
     },
     baseReducers: {
         mode: (state = 'embedded') => state,
-        maps: require('../MapStore2/web/client/reducers/maps'),
-        security: require('../MapStore2/web/client/reducers/security'),
-        searchconfig: require('../MapStore2/web/client/reducers/searchconfig')
+        maps: require('@mapstore/framework/reducers/maps').default,
+        security: require('@mapstore/framework/reducers/security').default,
+        searchconfig: require('@mapstore/framework/reducers/searchconfig').default
     },
     initialActions: [],
     baseEpics: {

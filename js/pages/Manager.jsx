@@ -8,9 +8,9 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const {connect} = require('react-redux');
-const Page = require('../../MapStore2/web/client/containers/Page');
+const Page = require('../../MapStore2/web/client/containers/Page').default;
 const {resetControls} = require('../../MapStore2/web/client/actions/controls');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils').default;
 
 class Home extends React.Component {
     static propTypes = {

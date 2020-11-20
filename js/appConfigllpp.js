@@ -11,13 +11,13 @@ module.exports = {
     pages: [{
         name: "embedviewer",
         path: "/:mapId",
-        component: require('./pages/Embedded')
+        component: require('@js/pages/Embedded')
     }, {
         name: "llpp",
         path: "/:typology/:idCantiere",
-        component: require('./pages/Cantieri')
+        component: require('@js/pages/Cantieri')
     }],
-    pluginsDef: require('./llppPlugins'),
+    pluginsDef: require('@js/llppPlugins'),
     translations: ["MapStore2/web/client/translations", "translations"],
     initialState: {
         defaultState: {

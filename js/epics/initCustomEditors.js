@@ -7,10 +7,10 @@
  */
 const Rx = require('rxjs');
 const React = require('react');
-const { MAP_CONFIG_LOADED } = require('../../MapStore2/web/client/actions/config');
-const { register, clean } = require('../../MapStore2/web/client/utils/featuregrid/EditorRegistry');
+const { MAP_CONFIG_LOADED } = require('@mapstore/framework/actions/config');
+const { register, clean } = require('@mapstore/framework/utils/featuregrid/EditorRegistry');
 const AddressesEditor = require('../components/AddressesEditor');
-const MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('@mapstore/framework/utils/MapInfoUtils');
 const geocollectViewerEnhancer = require('../enhancers/geocollectViewerEnhancer');
 const GeocollectViewer = require('../viewer/GeocollectViewer');
 

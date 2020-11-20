@@ -8,10 +8,10 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const {connect} = require('react-redux');
-const Page = require('../../MapStore2/web/client/containers/Page');
+const Page = require('../../MapStore2/web/client/containers/Page').default;
 const {resetControls} = require('../../MapStore2/web/client/actions/controls');
 const {loadMaps} = require('../../MapStore2/web/client/actions/maps');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils').default;
 
 require('../../assets/css/custom.css');
 
