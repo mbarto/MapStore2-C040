@@ -35,7 +35,7 @@ import { MAP_CONFIG_LOADED }  from '@mapstore/framework/actions/config';
 import { changeMousePositionState }  from '@mapstore/framework/actions/mousePosition';
 import {serviceRESTUrlSelector}  from '../selector/cantieri';
 
-import FilterUtils  from '@mapstore/framework/utils/FilterUtils';
+import * as FilterUtils  from '@mapstore/framework/utils/FilterUtils';
 import {transaction, describeFeatureType}  from '../api/WFST';
 import assign  from 'object-assign';
 

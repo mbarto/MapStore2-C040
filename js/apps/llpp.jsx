@@ -15,6 +15,11 @@ import StandardApp from '@mapstore/framework/components/app/StandardApp';
 import appConfigllpp from '@js/appConfigllpp';
 import StandardRouter from '@mapstore/framework/components/app/StandardRouter';
 import StandardStore from '@mapstore/framework/stores/StandardStore';
+import {
+    standardReducers,
+    standardEpics,
+    standardRootReducerFunc
+} from '@mapstore/framework/stores/defaultOptions';
 import maps from '@mapstore/framework/reducers/maps';
 import security from '@mapstore/framework/reducers/security';
 
@@ -30,13 +35,20 @@ const startApp = () => {
         pages
     }));
     const ConnectedStandardRouter = connect(routerSelector)(StandardRouter);
-    const appStore = StandardStore.bind(null, initialState, {
-        mode: (state = 'embedded') => state,
-        maps,
-        security
-    }, {
-        "FEATUREVIEWER:startLoading": startLoading,
-        "FEATUREVIEWER:updateFeatureLoader": updateFeatureLoader
+    const appStore = StandardStore.bind(null, {
+        initialState,
+        appReducers: {
+            ...standardReducers,
+            mode: (state = 'embedded') => state,
+            maps,
+            security
+        },
+        appEpics: {
+            ...standardEpics,
+            "FEATUREVIEWER:startLoading": startLoading,
+            "FEATUREVIEWER:updateFeatureLoader": updateFeatureLoader
+        },
+        rootReducerFunc: standardRootReducerFunc
     });
     const appConfig = {
         appStore,

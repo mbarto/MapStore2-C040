@@ -8,6 +8,7 @@
 
 import MapStore2JSAPI from '@mapstore/framework/jsapi/MapStore2';
 import apiPlugins from '@js/apiPlugins';
+import appConfigEmbedded from '@js/appConfigEmbedded';
 
 const getScriptPath = () => {
     const scriptEl = document.getElementById('ms2-api');
@@ -21,7 +22,7 @@ const MapStore2 = MapStore2JSAPI
             path: __MAPSTORE_PROJECT_CONFIG__.themePath || getScriptPath() + '/themes'
         },
         noLocalConfig: true,
-        initialState: require('@js/appConfigEmbedded').initialState,
-        translations: require('@js/appConfigEmbedded').translations
+        initialState: appConfigEmbedded.initialState,
+        translations: appConfigEmbedded.translations
     });
 window.MapStore2 = MapStore2;

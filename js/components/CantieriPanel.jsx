@@ -3,7 +3,7 @@ import Spinner  from 'react-spinkit';
 import Message  from '../../MapStore2/web/client/components/I18N/Message';
 import StyledDiv  from './StyledDiv';
 import ToggleButton  from '../../MapStore2/web/client/components/buttons/ToggleButton';
-import LocaleUtils  from '../../MapStore2/web/client/utils/LocaleUtils';
+import * as LocaleUtils  from '../../MapStore2/web/client/utils/LocaleUtils';
 import Modal  from '../../MapStore2/web/client/components/misc/Modal';
 
 import React  from 'react';

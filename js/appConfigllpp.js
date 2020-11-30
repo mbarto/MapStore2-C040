@@ -8,6 +8,7 @@
 
 import Embedded from '@js/pages/Embedded';
 import Cantieri from '@js/pages/Cantieri';
+import pluginsDef from '@js/llppPlugins';
 
 export default {
     printingEnabled: false,
@@ -21,6 +22,7 @@ export default {
         component: Cantieri
     }],
     translations: ["MapStore2/web/client/translations", "translations"],
+    pluginsDef,
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},

@@ -20,6 +20,8 @@ import GeoStory from '@mapstore/framework/product/pages/GeoStory';
 
 import security from '@mapstore/framework/reducers/security';
 
+import pluginsDef from '@js/plugins.js';
+
 export default {
     printingEnabled: true,
     pages: [{
@@ -95,6 +97,7 @@ export default {
         path: "/geostory/shared/:gid",
         component: GeoStory
     }],
+    pluginsDef,
     initialState: {
         defaultState: {
             mapInfo: {enabled: true, infoFormat: 'text/html'},

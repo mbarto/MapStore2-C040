@@ -15,6 +15,8 @@ import maps from '@mapstore/framework/reducers/maps';
 import security from '@mapstore/framework/reducers/security';
 import searchconfig from '@mapstore/framework/reducers/searchconfig';
 
+import pluginsDef from '@js/apiPlugins';
+
 export default {
     mode: 'embedded',
     printingEnabled: false,
@@ -35,6 +37,7 @@ export default {
         path: "/wmsfeatureviewer/:mapType/:layer/:cql_filter",
         component: FeatureViewer
     }],
+    pluginsDef,
     translations: ["MapStore2/web/client/translations", "translations"],
     initialState: {
         defaultState: {
