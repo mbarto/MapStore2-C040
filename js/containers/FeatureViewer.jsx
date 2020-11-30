@@ -5,13 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React  from 'react';
 
-const {connect} = require('react-redux');
+import {connect}  from 'react-redux';
 
-const ConfigUtils = require('@mapstore/framework/utils/ConfigUtils').default;
-const PluginsUtils = require('@mapstore/framework/utils/PluginsUtils').default;
-const PropTypes = require('prop-types');
+import ConfigUtils  from '@mapstore/framework/utils/ConfigUtils';
+import PluginsUtils  from '@mapstore/framework/utils/PluginsUtils';
+import PropTypes  from 'prop-types';
 
 const PluginsContainer = connect((state) => ({
     pluginsConfig: state.plugins || ConfigUtils.getConfigProp('plugins') || null,
@@ -41,4 +41,4 @@ class MapViewer extends React.Component {
     }
 }
 
-module.exports = MapViewer;
+export default MapViewer;

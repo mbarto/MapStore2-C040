@@ -5,29 +5,35 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {startLoading, updateFeatureLoader} = require('@js/epics/featureloader');
-const {ensureIntl} = require('@mapstore/framework/utils/LocaleUtils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { startLoading, updateFeatureLoader } from '@js/epics/featureloader';
+import { ensureIntl } from '@mapstore/framework/utils/LocaleUtils';
+import StandardApp from '@mapstore/framework/components/app/StandardApp';
+import appConfigllpp from '@js/appConfigllpp';
+import StandardRouter from '@mapstore/framework/components/app/StandardRouter';
+import StandardStore from '@mapstore/framework/stores/StandardStore';
+import maps from '@mapstore/framework/reducers/maps';
+import security from '@mapstore/framework/reducers/security';
+
 const startApp = () => {
-    const StandardApp = require('@mapstore/framework/components/app/StandardApp').default;
-    const {pages, pluginsDef, initialState, storeOpts, printingEnabled} = require('@js/appConfigllpp');
+    const { pages, pluginsDef, initialState, storeOpts, printingEnabled } = appConfigllpp;
     const routerSelector = createSelector(state => state.locale, (locale) => ({
         locale: locale || {},
         version: "no-version",
         themeCfg: {
             theme: "comge",
-            path:  __MAPSTORE_PROJECT_CONFIG__.themePath
+            path: __MAPSTORE_PROJECT_CONFIG__.themePath
         },
         pages
     }));
-    const StandardRouter = connect(routerSelector)(require('@mapstore/framework/components/app/StandardRouter').default);
-    const appStore = require('@mapstore/framework/stores/StandardStore').default.bind(null, initialState, {
+    const ConnectedStandardRouter = connect(routerSelector)(StandardRouter);
+    const appStore = StandardStore.bind(null, initialState, {
         mode: (state = 'embedded') => state,
-        maps: require('@mapstore/framework/reducers/maps').default,
-        security: require('@mapstore/framework/reducers/security').default
+        maps,
+        security
     }, {
         "FEATUREVIEWER:startLoading": startLoading,
         "FEATUREVIEWER:updateFeatureLoader": updateFeatureLoader
@@ -37,7 +43,7 @@ const startApp = () => {
         storeOpts,
         pluginsDef,
         initialActions: [],
-        appComponent: StandardRouter,
+        appComponent: ConnectedStandardRouter,
         printingEnabled
     };
     ReactDOM.render(

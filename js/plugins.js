@@ -7,122 +7,242 @@
  */
 
 // TODO take all plugins from ms2
-module.exports = {
+
+// custom plugins
+import AttributionPlugin from './plugins/Attribution';
+import FeatureLoader from './plugins/FeatureLoader';
+import FooterPlugin from './plugins/Footer';
+import GeoNetworkLinkPlugin from './plugins/GeoNetworkLink';
+import HeaderPlugin from './plugins/Header';
+import LoginPlugin from './plugins/Login';
+import LoginModalPlugin from './plugins/LoginModal';
+import PrivacyNote from './plugins/PrivacyNote';
+// product plugins
+import NavMenu from '@mapstore/framework/product/plugins/NavMenu';
+import AboutPlugin from '@mapstore/framework/product/plugins/About';
+// framework  plugin
+import AddGroupPlugin from '@mapstore/framework/plugins/AddGroup';
+import AnnotationsPlugin from '@mapstore/framework/plugins/Annotations';
+import AutoMapUpdatePlugin from '@mapstore/framework/plugins/AutoMapUpdate';
+import BackgroundSelectorPlugin from '@mapstore/framework/plugins/BackgroundSelector';
+// BackgroundSwitcherPlugin from '@mapstore/framework/plugins/BackgroundSwitcher'; NOT_NEEDED
+import BurgerMenuPlugin from '@mapstore/framework/plugins/BurgerMenu';
+import CRSSelectorPlugin from '@mapstore/framework/plugins/CRSSelector';
+import ContentTabs from '@mapstore/framework/plugins/ContentTabs';
+import ContextPlugin from '@mapstore/framework/plugins/Context';
+import ContextCreatorPlugin from '@mapstore/framework/plugins/ContextCreator';
+import ContextManagerPlugin from '@mapstore/framework/plugins/contextmanager/ContextManager';
+import CookiePlugin from '@mapstore/framework/plugins/Cookie';
+import CreateNewMapPlugin from '@mapstore/framework/plugins/CreateNewMap';
+import Dashboard from '@mapstore/framework/plugins/Dashboard';
+import DashboardEditor from '@mapstore/framework/plugins/DashboardEditor';
+import {
+    DashboardSaveAs as DashboardSavePlugin,
+    DashboardSaveAs as DashboardSaveAsPlugin
+} from '@mapstore/framework/plugins/DashboardSave';
+import DashboardsPlugin from '@mapstore/framework/plugins/Dashboards';
+import DetailsPlugin from '@mapstore/framework/plugins/Details';
+import DrawerMenuPlugin from '@mapstore/framework/plugins/DrawerMenu';
+import ExpanderPlugin from '@mapstore/framework/plugins/Expander';
+import FeatureEditorPlugin from '@mapstore/framework/plugins/FeatureEditor';
+import FeaturedMaps from '@mapstore/framework/plugins/FeaturedMaps';
+import FeedbackMaskPlugin from '@mapstore/framework/plugins/FeedbackMask';
+import FilterLayerPlugin from '@mapstore/framework/plugins/FilterLayer';
+// FloatingLegendPlugin from '@mapstore/framework/plugins/FloatingLegend'; NOT_NEEDED
+import FullScreenPlugin from '@mapstore/framework/plugins/FullScreen';
+import GeoStoryPlugin from '@mapstore/framework/plugins/GeoStory';
+import GeoStoriesPlugin from '@mapstore/framework/plugins/GeoStories';
+import GeoStoryEditorPlugin from '@mapstore/framework/plugins/GeoStoryEditor';
+import {
+    GeoStorySave as GeoStorySavePlugin,
+    GeoStorySaveAs as GeoStorySaveAsPlugin
+} from '@mapstore/framework/plugins/GeoStorySave';
+import GeoStoryNavigationPlugin from '@mapstore/framework/plugins/GeoStoryNavigation';
+import GlobeViewSwitcherPlugin from '@mapstore/framework/plugins/GlobeViewSwitcher';
+import GoFull from '@mapstore/framework/plugins/GoFull';
+// GridContainerPlugin from '@mapstore/framework/plugins/GridContainer'; NOT NEEDED (bound to theme ThemeSwitcherPlugin and MapTypePlugin)
+import GroupManagerPlugin from '@mapstore/framework/plugins/manager/GroupManager';
+import HelpLinkPlugin from '@mapstore/framework/plugins/HelpLink';
+import HelpPlugin from '@mapstore/framework/plugins/Help';
+import HomePlugin from '@mapstore/framework/plugins/Home';
+import IdentifyPlugin from '@mapstore/framework/plugins/Identify';
+import LanguagePlugin from '@mapstore/framework/plugins/Language';
+import LocatePlugin from '@mapstore/framework/plugins/Locate';
+import ManagerMenuPlugin from '@mapstore/framework/plugins/manager/ManagerMenu';
+import ManagerPlugin from '@mapstore/framework/plugins/manager/Manager';
+import MapEditorPlugin from '@mapstore/framework/plugins/MapEditor';
+import MapExportPlugin from '@mapstore/framework/plugins/MapExport';
+import MapFooterPlugin from '@mapstore/framework/plugins/MapFooter';
+import MapImportPlugin from '@mapstore/framework/plugins/MapImport';
+import MapLoadingPlugin from '@mapstore/framework/plugins/MapLoading';
+import MapPlugin from '@mapstore/framework/plugins/Map';
+import MapSearchPlugin from '@mapstore/framework/plugins/MapSearch';
+import MapsPlugin from '@mapstore/framework/plugins/Maps';
+import MapCatalogPlugin from '@mapstore/framework/plugins/MapCatalog';
+import MapTemplatesPlugin from '@mapstore/framework/plugins/MapTemplates';
+import MeasurePlugin from '@mapstore/framework/plugins/Measure';
+import MediaEditorPlugin from '@mapstore/framework/plugins/MediaEditor';
+import MetadataExplorerPlugin from '@mapstore/framework/plugins/MetadataExplorer';
+import MousePositionPlugin from '@mapstore/framework/plugins/MousePosition';
+import NotificationsPlugin from '@mapstore/framework/plugins/Notifications';
+import OmniBarPlugin from '@mapstore/framework/plugins/OmniBar';
+import PlaybackPlugin from '@mapstore/framework/plugins/Playback';
+import PrintPlugin from '@mapstore/framework/plugins/Print';
+import QueryPanelPlugin from '@mapstore/framework/plugins/QueryPanel';
+import RedirectPlugin from '@mapstore/framework/plugins/Redirect';
+import History from '@mapstore/framework/plugins/History';
+import RulesDataGridPlugin from '@mapstore/framework/plugins/RulesDataGrid';
+import RulesEditorPlugin from '@mapstore/framework/plugins/RulesEditor';
+import RulesManagerFooter from '@mapstore/framework/plugins/RulesManagerFooter';
+import SaveAsPlugin from '@mapstore/framework/plugins/SaveAs';
+import SavePlugin from '@mapstore/framework/plugins/Save';
+import ScaleBoxPlugin from '@mapstore/framework/plugins/ScaleBox';
+import ScrollTopPlugin from '@mapstore/framework/plugins/ScrollTop';
+import SearchPlugin from '@mapstore/framework/plugins/Search';
+import SearchServicesConfigPlugin from '@mapstore/framework/plugins/SearchServicesConfig';
+import SettingsPlugin from '@mapstore/framework/plugins/Settings';
+import * as SharePlugin from '@mapstore/framework/plugins/Share';
+import SnapshotPlugin from '@mapstore/framework/plugins/Snapshot';
+import StyleEditorPlugin from '@mapstore/framework/plugins/StyleEditor';
+import TOCItemsSettingsPlugin from '@mapstore/framework/plugins/TOCItemsSettings';
+import TOCPlugin from '@mapstore/framework/plugins/TOC';
+import ThematicLayerPlugin from '@mapstore/framework/plugins/ThematicLayer';
+// ThemeSwitcherPlugin from '../plugins/ThemeSwitcher'; NOT_NEEDED
+import TimelinePlugin from '@mapstore/framework/plugins/Timeline';
+import ToolbarPlugin from '@mapstore/framework/plugins/Toolbar';
+import TutorialPlugin from '@mapstore/framework/plugins/Tutorial';
+
+import UserExtensionsPlugin from '@mapstore/framework/plugins/UserExtensions';
+import UserManagerPlugin from '@mapstore/framework/plugins/manager/UserManager';
+import UserSessionPlugin from '@mapstore/framework/plugins/UserSession';
+import VersionPlugin from '@mapstore/framework/plugins/Version';
+import LayerDownloadPlugin from '@mapstore/framework/plugins/LayerDownload';
+import WidgetsBuilderPlugin from '@mapstore/framework/plugins/WidgetsBuilder';
+import WidgetsPlugin from '@mapstore/framework/plugins/Widgets';
+import WidgetsTrayPlugin from '@mapstore/framework/plugins/WidgetsTray';
+import ZoomAllPlugin from '@mapstore/framework/plugins/ZoomAll';
+import ZoomInPlugin from '@mapstore/framework/plugins/ZoomIn';
+import ZoomOutPlugin from '@mapstore/framework/plugins/ZoomOut';
+
+import ReactSwipe from 'react-swipeable-views';
+import SwipeHeader from '@mapstore/framework/components/data/identify/SwipeHeader';
+
+export default {
     plugins: {
         // custom plugins
-        AttributionPlugin: require('./plugins/Attribution'),
-        FeatureLoader: require('./plugins/FeatureLoader'),
-        FooterPlugin: require('./plugins/Footer'),
-        GeoNetworkLinkPlugin: require('./plugins/GeoNetworkLink'),
-        HeaderPlugin: require('./plugins/Header'),
-        LoginPlugin: require('./plugins/Login'),
-        LoginModalPlugin: require('./plugins/LoginModal').default,
-        PrivacyNote: require('./plugins/PrivacyNote'),
+        AttributionPlugin,
+        FeatureLoader,
+        FooterPlugin,
+        GeoNetworkLinkPlugin,
+        HeaderPlugin,
+        LoginPlugin,
+        LoginModalPlugin,
+        PrivacyNote,
         // product plugins
-        NavMenu: require('@mapstore/framework/product/plugins/NavMenu').default,
-        AboutPlugin: require('@mapstore/framework/product/plugins/About').default,
+        NavMenu,
+        AboutPlugin,
         // framework  plugin
-        AddGroupPlugin: require('@mapstore/framework/plugins/AddGroup').default,
-        AnnotationsPlugin: require('@mapstore/framework/plugins/Annotations').default,
-        AutoMapUpdatePlugin: require('@mapstore/framework/plugins/AutoMapUpdate').default,
-        BackgroundSelectorPlugin: require('@mapstore/framework/plugins/BackgroundSelector').default,
-        // BackgroundSwitcherPlugin: require('@mapstore/framework/plugins/BackgroundSwitcher').default, NOT_NEEDED
-        BurgerMenuPlugin: require('@mapstore/framework/plugins/BurgerMenu').default,
-        CRSSelectorPlugin: require('@mapstore/framework/plugins/CRSSelector').default,
-        ContentTabs: require('@mapstore/framework/plugins/ContentTabs').default,
-        ContextPlugin: require('@mapstore/framework/plugins/Context').default,
-        ContextCreatorPlugin: require('@mapstore/framework/plugins/ContextCreator').default,
-        ContextManagerPlugin: require('@mapstore/framework/plugins/contextmanager/ContextManager').default,
-        CookiePlugin: require('@mapstore/framework/plugins/Cookie').default,
-        CreateNewMapPlugin: require('@mapstore/framework/plugins/CreateNewMap').default,
-        Dashboard: require('@mapstore/framework/plugins/Dashboard').default,
-        DashboardEditor: require('@mapstore/framework/plugins/DashboardEditor').default,
-        DashboardSavePlugin: require('@mapstore/framework/plugins/DashboardSave').DashboardSave,
-        DashboardSaveAsPlugin: require('@mapstore/framework/plugins/DashboardSave').DashboardSaveAs,
-        DashboardsPlugin: require('@mapstore/framework/plugins/Dashboards').default,
-        DetailsPlugin: require('@mapstore/framework/plugins/Details').default,
-        DrawerMenuPlugin: require('@mapstore/framework/plugins/DrawerMenu').default,
-        ExpanderPlugin: require('@mapstore/framework/plugins/Expander').default,
-        FeatureEditorPlugin: require('@mapstore/framework/plugins/FeatureEditor').default,
-        FeaturedMaps: require('@mapstore/framework/plugins/FeaturedMaps').default,
-        FeedbackMaskPlugin: require('@mapstore/framework/plugins/FeedbackMask').default,
-        FilterLayerPlugin: require('@mapstore/framework/plugins/FilterLayer').default,
-        // FloatingLegendPlugin: require('@mapstore/framework/plugins/FloatingLegend').default, NOT_NEEDED
-        FullScreenPlugin: require('@mapstore/framework/plugins/FullScreen').default,
-        GeoStoryPlugin: require('@mapstore/framework/plugins/GeoStory').default,
-        GeoStoriesPlugin: require('@mapstore/framework/plugins/GeoStories').default,
-        GeoStoryEditorPlugin: require('@mapstore/framework/plugins/GeoStoryEditor').default,
-        GeoStorySavePlugin: require('@mapstore/framework/plugins/GeoStorySave').GeoStorySave,
-        GeoStorySaveAsPlugin: require('@mapstore/framework/plugins/GeoStorySave').GeoStorySaveAs,
-        GeoStoryNavigationPlugin: require('@mapstore/framework/plugins/GeoStoryNavigation').default,
-        GlobeViewSwitcherPlugin: require('@mapstore/framework/plugins/GlobeViewSwitcher').default,
-        GoFull: require('@mapstore/framework/plugins/GoFull').default,
-        // GridContainerPlugin: require('@mapstore/framework/plugins/GridContainer').default, NOT NEEDED (bound to theme ThemeSwitcherPlugin and MapTypePlugin)
-        GroupManagerPlugin: require('@mapstore/framework/plugins/manager/GroupManager').default,
-        HelpLinkPlugin: require('@mapstore/framework/plugins/HelpLink').default,
-        HelpPlugin: require('@mapstore/framework/plugins/Help').default,
-        HomePlugin: require('@mapstore/framework/plugins/Home').default,
-        IdentifyPlugin: require('@mapstore/framework/plugins/Identify').default,
-        LanguagePlugin: require('@mapstore/framework/plugins/Language').default,
-        LocatePlugin: require('@mapstore/framework/plugins/Locate').default,
-        ManagerMenuPlugin: require('@mapstore/framework/plugins/manager/ManagerMenu').default,
-        ManagerPlugin: require('@mapstore/framework/plugins/manager/Manager').default,
-        MapEditorPlugin: require('@mapstore/framework/plugins/MapEditor').default,
-        MapExportPlugin: require('@mapstore/framework/plugins/MapExport').default,
-        MapFooterPlugin: require('@mapstore/framework/plugins/MapFooter').default,
-        MapImportPlugin: require('@mapstore/framework/plugins/MapImport').default,
-        MapLoadingPlugin: require('@mapstore/framework/plugins/MapLoading').default,
-        MapPlugin: require('@mapstore/framework/plugins/Map').default,
-        MapSearchPlugin: require('@mapstore/framework/plugins/MapSearch').default,
-        MapsPlugin: require('@mapstore/framework/plugins/Maps').default,
-        MapCatalogPlugin: require('@mapstore/framework/plugins/MapCatalog').default,
-        MapTemplatesPlugin: require('@mapstore/framework/plugins/MapTemplates').default,
-        MeasurePlugin: require('@mapstore/framework/plugins/Measure').default,
-        MediaEditorPlugin: require('@mapstore/framework/plugins/MediaEditor').default,
-        MetadataExplorerPlugin: require('@mapstore/framework/plugins/MetadataExplorer').default,
-        MousePositionPlugin: require('@mapstore/framework/plugins/MousePosition').default,
-        NotificationsPlugin: require('@mapstore/framework/plugins/Notifications').default,
-        OmniBarPlugin: require('@mapstore/framework/plugins/OmniBar').default,
-        PlaybackPlugin: require('@mapstore/framework/plugins/Playback').default,
-        PrintPlugin: require('@mapstore/framework/plugins/Print').default,
-        QueryPanelPlugin: require('@mapstore/framework/plugins/QueryPanel').default,
-        RedirectPlugin: require('@mapstore/framework/plugins/Redirect').default,
-        RedoPlugin: require('@mapstore/framework/plugins/History').default,
-        RulesDataGridPlugin: require('@mapstore/framework/plugins/RulesDataGrid').default,
-        RulesEditorPlugin: require('@mapstore/framework/plugins/RulesEditor').default,
-        RulesManagerFooter: require('@mapstore/framework/plugins/RulesManagerFooter').default,
-        SaveAsPlugin: require('@mapstore/framework/plugins/SaveAs').default,
-        SavePlugin: require('@mapstore/framework/plugins/Save').default,
-        ScaleBoxPlugin: require('@mapstore/framework/plugins/ScaleBox').default,
-        ScrollTopPlugin: require('@mapstore/framework/plugins/ScrollTop').default,
-        SearchPlugin: require('@mapstore/framework/plugins/Search').default,
-        SearchServicesConfigPlugin: require('@mapstore/framework/plugins/SearchServicesConfig').default,
-        SettingsPlugin: require('@mapstore/framework/plugins/Settings').default,
-        SharePlugin: require('@mapstore/framework/plugins/Share'),
-        SnapshotPlugin: require('@mapstore/framework/plugins/Snapshot').default,
-        StyleEditorPlugin: require('@mapstore/framework/plugins/StyleEditor').default,
-        TOCItemsSettingsPlugin: require('@mapstore/framework/plugins/TOCItemsSettings').default,
-        TOCPlugin: require('@mapstore/framework/plugins/TOC').default,
-        ThematicLayerPlugin: require('@mapstore/framework/plugins/ThematicLayer').default,
-        // ThemeSwitcherPlugin: require('../plugins/ThemeSwitcher').default, NOT_NEEDED
-        TimelinePlugin: require('@mapstore/framework/plugins/Timeline').default,
-        ToolbarPlugin: require('@mapstore/framework/plugins/Toolbar').default,
-        TutorialPlugin: require('@mapstore/framework/plugins/Tutorial').default,
-        UndoPlugin: require('@mapstore/framework/plugins/History').default,
-        UserExtensionsPlugin: require('@mapstore/framework/plugins/UserExtensions').default,
-        UserManagerPlugin: require('@mapstore/framework/plugins/manager/UserManager').default,
-        UserSessionPlugin: require('@mapstore/framework/plugins/UserSession').default,
-        VersionPlugin: require('@mapstore/framework/plugins/Version').default,
-        WFSDownloadPlugin: require('@mapstore/framework/plugins/WFSDownload').default,
-        WidgetsBuilderPlugin: require('@mapstore/framework/plugins/WidgetsBuilder').default,
-        WidgetsPlugin: require('@mapstore/framework/plugins/Widgets').default,
-        WidgetsTrayPlugin: require('@mapstore/framework/plugins/WidgetsTray').default,
-        ZoomAllPlugin: require('@mapstore/framework/plugins/ZoomAll').default,
-        ZoomInPlugin: require('@mapstore/framework/plugins/ZoomIn').default,
-        ZoomOutPlugin: require('@mapstore/framework/plugins/ZoomOut').default
+        AddGroupPlugin,
+        AnnotationsPlugin,
+        AutoMapUpdatePlugin,
+        BackgroundSelectorPlugin,
+
+        BurgerMenuPlugin,
+        CRSSelectorPlugin,
+        ContentTabs,
+        ContextPlugin,
+        ContextCreatorPlugin,
+        ContextManagerPlugin,
+        CookiePlugin,
+        CreateNewMapPlugin,
+        Dashboard,
+        DashboardEditor,
+        DashboardSavePlugin,
+        DashboardSaveAsPlugin,
+        DashboardsPlugin,
+        DetailsPlugin,
+        DrawerMenuPlugin,
+        ExpanderPlugin,
+        FeatureEditorPlugin,
+        FeaturedMaps,
+        FeedbackMaskPlugin,
+        FilterLayerPlugin,
+
+        FullScreenPlugin,
+        GeoStoryPlugin,
+        GeoStoriesPlugin,
+        GeoStoryEditorPlugin,
+        GeoStorySavePlugin,
+        GeoStorySaveAsPlugin,
+        GeoStoryNavigationPlugin,
+        GlobeViewSwitcherPlugin,
+        GoFull,
+
+        GroupManagerPlugin,
+        HelpLinkPlugin,
+        HelpPlugin,
+        HomePlugin,
+        IdentifyPlugin,
+        LanguagePlugin,
+        LocatePlugin,
+        ManagerMenuPlugin,
+        ManagerPlugin,
+        MapEditorPlugin,
+        MapExportPlugin,
+        MapFooterPlugin,
+        MapImportPlugin,
+        MapLoadingPlugin,
+        MapPlugin,
+        MapSearchPlugin,
+        MapsPlugin,
+        MapCatalogPlugin,
+        MapTemplatesPlugin,
+        MeasurePlugin,
+        MediaEditorPlugin,
+        MetadataExplorerPlugin,
+        MousePositionPlugin,
+        NotificationsPlugin,
+        OmniBarPlugin,
+        PlaybackPlugin,
+        PrintPlugin,
+        QueryPanelPlugin,
+        RedirectPlugin,
+        RedoPlugin: History,
+        RulesDataGridPlugin,
+        RulesEditorPlugin,
+        RulesManagerFooter,
+        SaveAsPlugin,
+        SavePlugin,
+        ScaleBoxPlugin,
+        ScrollTopPlugin,
+        SearchPlugin,
+        SearchServicesConfigPlugin,
+        SettingsPlugin,
+        SharePlugin,
+        SnapshotPlugin,
+        StyleEditorPlugin,
+        TOCItemsSettingsPlugin,
+        TOCPlugin,
+        ThematicLayerPlugin,
+
+        TimelinePlugin,
+        ToolbarPlugin,
+        TutorialPlugin,
+        UndoPlugin: History,
+        UserExtensionsPlugin,
+        UserManagerPlugin,
+        UserSessionPlugin,
+        VersionPlugin,
+        LayerDownloadPlugin,
+        WidgetsBuilderPlugin,
+        WidgetsPlugin,
+        WidgetsTrayPlugin,
+        ZoomAllPlugin,
+        ZoomInPlugin,
+        ZoomOutPlugin
     },
     requires: {
-        ReactSwipe: require('react-swipeable-views').default,
-        SwipeHeader: require('@mapstore/framework/components/data/identify/SwipeHeader').default
+        ReactSwipe,
+        SwipeHeader
     }
 };

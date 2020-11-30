@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {Button, Row} = require('react-bootstrap');
+import PropTypes  from 'prop-types';
+import React  from 'react';
+import {Button, Row}  from 'react-bootstrap';
 
-const LoginForm = require('@mapstore/framework/components/security/forms/LoginForm').default;
-const Modal = require('@mapstore/framework/components/misc/Modal').default;
-const Message = require('@mapstore/framework/components/I18N/Message').default;
-const {getMessageById} = require('@mapstore/framework/utils/LocaleUtils');
+import LoginForm  from '@mapstore/framework/components/security/forms/LoginForm';
+import Modal  from '@mapstore/framework/components/misc/Modal';
+import Message  from '@mapstore/framework/components/I18N/Message';
+import {getMessageById}  from '@mapstore/framework/utils/LocaleUtils';
 
-require('@mapstore/framework/components/security/css/security.css');
+import '@mapstore/framework/components/security/css/security.css';
 
 /**
  * A Modal window to show password reset form
@@ -128,4 +128,4 @@ class LoginModal extends React.Component {
     };
 }
 
-module.exports = LoginModal;
+export default LoginModal;

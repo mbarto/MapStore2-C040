@@ -465,7 +465,7 @@
       },
       "Notifications",
       {
-        "name": "WFSDownload",
+        "name": "LayerDownload",
         "cfg": {
           "formats": [{
               "name": "csv",

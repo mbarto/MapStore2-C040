@@ -5,54 +5,102 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-module.exports = {
+
+
+// custom plugins
+import AttributionPlugin from './plugins/Attribution';
+import FeatureLoader from './plugins/FeatureLoader';
+// framework plugins
+import BurgerMenuPlugin from '@mapstore/framework/plugins/BurgerMenu';
+import CreateNewMapPlugin from '@mapstore/framework/plugins/CreateNewMap';
+import DrawerMenuPlugin from '@mapstore/framework/plugins/DrawerMenu';
+import ExpanderPlugin from '@mapstore/framework/plugins/Expander';
+import HelpPlugin from '@mapstore/framework/plugins/Help';
+import HomePlugin from '@mapstore/framework/plugins/Home';
+import IdentifyPlugin from '@mapstore/framework/plugins/Identify';
+import LanguagePlugin from '@mapstore/framework/plugins/Language';
+import LocatePlugin from '@mapstore/framework/plugins/Locate';
+import LoginPlugin from '@mapstore/framework/plugins/Login';
+import MapFooter from '@mapstore/framework/plugins/MapFooter';
+import MapLoadingPlugin from '@mapstore/framework/plugins/MapLoading';
+import MapPlugin from '@mapstore/framework/plugins/Map';
+import MapSearchPlugin from '@mapstore/framework/plugins/MapSearch';
+import MapsPlugin from '@mapstore/framework/plugins/Maps';
+import MeasurePlugin from '@mapstore/framework/plugins/Measure';
+import MeasureResultsPlugin from '@mapstore/framework/plugins/MeasureResults';
+import MetadataExplorerPlugin from '@mapstore/framework/plugins/MetadataExplorer';
+import MousePositionPlugin from '@mapstore/framework/plugins/MousePosition';
+import NotificationsPlugin from '@mapstore/framework/plugins/Notifications';
+import OmniBarPlugin from '@mapstore/framework/plugins/OmniBar';
+import PrintPlugin from '@mapstore/framework/plugins/Print';
+import QueryPanelPlugin from '@mapstore/framework/plugins/QueryPanel';
+import RedirectPlugin from '@mapstore/framework/plugins/Redirect';
+import History from '@mapstore/framework/plugins/History';
+import SaveAsPlugin from '@mapstore/framework/plugins/SaveAs';
+import SavePlugin from '@mapstore/framework/plugins/Save';
+import ScaleBoxPlugin from '@mapstore/framework/plugins/ScaleBox';
+import SearchPlugin from '@mapstore/framework/plugins/Search';
+import SettingsPlugin from '@mapstore/framework/plugins/Settings';
+import * as SharePlugin from '@mapstore/framework/plugins/Share';
+import SnapshotPlugin from '@mapstore/framework/plugins/Snapshot';
+import TOCPlugin from '@mapstore/framework/plugins/TOC';
+import ToolbarPlugin from '@mapstore/framework/plugins/Toolbar';
+import TutorialPlugin from '@mapstore/framework/plugins/Tutorial';
+import ZoomAllPlugin from '@mapstore/framework/plugins/ZoomAll';
+import ZoomInPlugin from '@mapstore/framework/plugins/ZoomIn';
+import ZoomOutPlugin from '@mapstore/framework/plugins/ZoomOut';
+
+import ReactSwipe from 'react-swipeable-views';
+import SwipeHeader from '@mapstore/framework/components/data/identify/SwipeHeader';
+
+export default {
     plugins: {
         // custom plugins
-        AttributionPlugin: require('./plugins/Attribution'),
-        FeatureLoader: require('./plugins/FeatureLoader'),
+        AttributionPlugin,
+        FeatureLoader,
         // framework plugins
-        BurgerMenuPlugin: require('@mapstore/framework/plugins/BurgerMenu').default,
-        CreateNewMapPlugin: require('@mapstore/framework/plugins/CreateNewMap').default.default,
-        DrawerMenuPlugin: require('@mapstore/framework/plugins/DrawerMenu').default,
-        ExpanderPlugin: require('@mapstore/framework/plugins/Expander').default,
-        HelpPlugin: require('@mapstore/framework/plugins/Help').default,
-        HomePlugin: require('@mapstore/framework/plugins/Home').default,
-        IdentifyPlugin: require('@mapstore/framework/plugins/Identify').default,
-        LanguagePlugin: require('@mapstore/framework/plugins/Language').default,
-        LocatePlugin: require('@mapstore/framework/plugins/Locate').default,
-        LoginPlugin: require('@mapstore/framework/plugins/Login').default,
-        MapFooter: require('@mapstore/framework/plugins/MapFooter').default,
-        MapLoadingPlugin: require('@mapstore/framework/plugins/MapLoading').default,
-        MapPlugin: require('@mapstore/framework/plugins/Map').default,
-        MapSearchPlugin: require('@mapstore/framework/plugins/MapSearch').default,
-        MapsPlugin: require('@mapstore/framework/plugins/Maps').default,
-        MeasurePlugin: require('@mapstore/framework/plugins/Measure').default,
-        MeasureResultsPlugin: require('@mapstore/framework/plugins/MeasureResults').default,
-        MetadataExplorerPlugin: require('@mapstore/framework/plugins/MetadataExplorer').default,
-        MousePositionPlugin: require('@mapstore/framework/plugins/MousePosition').default,
-        NotificationsPlugin: require('@mapstore/framework/plugins/Notifications').default,
-        OmniBarPlugin: require('@mapstore/framework/plugins/OmniBar').default,
-        PrintPlugin: require('@mapstore/framework/plugins/Print').default,
-        QueryPanelPlugin: require('@mapstore/framework/plugins/QueryPanel').default,
-        RedirectPlugin: require('@mapstore/framework/plugins/Redirect').default,
-        RedoPlugin: require('@mapstore/framework/plugins/History').default,
-        SaveAsPlugin: require('@mapstore/framework/plugins/SaveAs').default,
-        SavePlugin: require('@mapstore/framework/plugins/Save').default.default,
-        ScaleBoxPlugin: require('@mapstore/framework/plugins/ScaleBox').default,
-        SearchPlugin: require('@mapstore/framework/plugins/Search').default,
-        SettingsPlugin: require('@mapstore/framework/plugins/Settings').default,
-        SharePlugin: require('@mapstore/framework/plugins/Share'),
-        SnapshotPlugin: require('@mapstore/framework/plugins/Snapshot').default,
-        TOCPlugin: require('@mapstore/framework/plugins/TOC').default,
-        ToolbarPlugin: require('@mapstore/framework/plugins/Toolbar').default,
-        TutorialPlugin: require('@mapstore/framework/plugins/Tutorial').default,
-        UndoPlugin: require('@mapstore/framework/plugins/History').default,
-        ZoomAllPlugin: require('@mapstore/framework/plugins/ZoomAll').default,
-        ZoomInPlugin: require('@mapstore/framework/plugins/ZoomIn').default,
-        ZoomOutPlugin: require('@mapstore/framework/plugins/ZoomOut'.default)
+        BurgerMenuPlugin,
+        CreateNewMapPlugin,
+        DrawerMenuPlugin,
+        ExpanderPlugin,
+        HelpPlugin,
+        HomePlugin,
+        IdentifyPlugin,
+        LanguagePlugin,
+        LocatePlugin,
+        LoginPlugin,
+        MapFooter,
+        MapLoadingPlugin,
+        MapPlugin,
+        MapSearchPlugin,
+        MapsPlugin,
+        MeasurePlugin,
+        MeasureResultsPlugin,
+        MetadataExplorerPlugin,
+        MousePositionPlugin,
+        NotificationsPlugin,
+        OmniBarPlugin,
+        PrintPlugin,
+        QueryPanelPlugin,
+        RedirectPlugin,
+        RedoPlugi: History,
+        SaveAsPlugin,
+        SavePlugin,
+        ScaleBoxPlugin,
+        SearchPlugin,
+        SettingsPlugin,
+        SharePlugin,
+        SnapshotPlugin,
+        TOCPlugin,
+        ToolbarPlugin,
+        TutorialPlugin,
+        UndoPlugin: History,
+        ZoomAllPlugin,
+        ZoomInPlugin,
+        ZoomOutPlugin
     },
     requires: {
-        ReactSwipe: require('react-swipeable-views').default,
-        SwipeHeader: require('../MapStore2/web/client/components/data/identify/SwipeHeader').default
+        ReactSwipe,
+        SwipeHeader
     }
 };

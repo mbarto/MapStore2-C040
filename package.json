@@ -17,7 +17,7 @@
     }
   },
   "devDependencies": {
-    "@mapstore/project": "file:../mapstore-project/mapstore-project-1.0.0.tgz"
+    "@mapstore/project": "git+https://github.com/geosolutions-it/mapstore-project.git#431ee1a167f9e16c75aec948f5eec2e7f1b1c716"
   },
   "dependencies": {
     "mapstore": "file:MapStore2"
@@ -28,7 +28,6 @@
     "test": "mapstore-project test standard",
     "test:watch": "mapstore-project test:watch standard",
     "update-project": "mapstore-project update standard",
-    "mvntest": "karma start ./karma.conf.single-run.js --reporters junit,dots,coverage",
     "lint": "eslint js --ext .jsx,.js"
   },
   "author": "GeoSolutions",

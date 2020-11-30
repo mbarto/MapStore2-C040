@@ -6,41 +6,49 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import main from '@mapstore/framework/product/main';
+import Embedded from '@js/pages/Embedded';
+import FeatureViewer from '@js/pages/FeatureViewer';
+import MapViewer from '@mapstore/framework/product/pages/MapViewer';
+import StandardRouter from '@mapstore/framework/components/app/StandardRouter';
+import appConfigEmbedded from '@js/appConfigEmbedded';
+import apiPlugins from '@js/apiPlugins.js';
+
 const pages = [{
     name: "embedviewer",
     path: "/:mapId",
-    component: require('@js/pages/Embedded')
+    component: Embedded
 }, {
     name: "viewer",
     path: "/featureviewer/:mapType/:layer/:cql_filter",
-    component: require('@js/pages/FeatureViewer')
+    component: FeatureViewer
 }, {
     name: "mapviewer",
     path: "/viewer/:mapType/:mapId",
-    component: require('@mapstore/framework/product/pages/MapViewer').default
+    component: MapViewer
 }, {
     name: "wmsviewer",
     path: "/wmsfeatureviewer/:mapType/:layer/:cql_filter",
-    component: require('@js/pages/FeatureViewer')
+    component: FeatureViewer
 }];
 const routerSelector = createSelector(state => state.locale, (locale) => ({
     locale: locale || {},
     version: "no-version",
     themeCfg: {
         theme: "comge",
-        path:  __MAPSTORE_PROJECT_CONFIG__.themePath
+        path: __MAPSTORE_PROJECT_CONFIG__.themePath
     },
     pages
 }));
-const StandardRouter = connect(routerSelector)(require('@mapstore/framework/components/app/StandardRouter').default);
+const ConnectedStandardRouter = connect(routerSelector)(StandardRouter);
 
-require('@mapstore/framework/product/main').default(
-    require('@js/appConfigEmbedded'),
-    require('@js/apiPlugins.js'),
+main(
+    appConfigEmbedded,
+    apiPlugins,
     (cfg) => ({
         ...cfg,
-        appComponent: StandardRouter
+        appComponent: ConnectedStandardRouter
     })
 );

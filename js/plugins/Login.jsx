@@ -6,19 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const {UserDetails, PasswordReset } = require('@mapstore/framework/plugins/login/index');
-const Login = require('./LoginModal').default;
-const PropTypes = require('prop-types');
+import React  from 'react';
+import {Glyphicon}  from 'react-bootstrap';
+import {UserDetails, PasswordReset }  from '@mapstore/framework/plugins/login/index';
+import Login  from './LoginModal';
+import PropTypes  from 'prop-types';
 
 
-const {connect} = require('@mapstore/framework/utils/PluginsUtils');
-const {setControlProperty} = require('@mapstore/framework/actions/controls');
-const {logoutWithReload} = require('@mapstore/framework/actions/security');
-
-require('@mapstore/framework/plugins/login/login.css');
+import {connect, createPlugin}  from '@mapstore/framework/utils/PluginsUtils';
+import {setControlProperty}  from '@mapstore/framework/actions/controls';
+import {logoutWithReload}  from '@mapstore/framework/actions/security';
+import security from '@mapstore/framework/reducers/security';
+import epics from '@mapstore/framework/epics/login';
+import UserMenuComponent from '../components/UserMenu';
+import '@mapstore/framework/plugins/login/login.css';
 /**
   * Login Plugin. Allow to login/logout or show user info and reset password tools
   * @class Login
@@ -41,7 +42,7 @@ const UserMenu = connect((state) => ({
     onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true, true),
     onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true, true),
     onLogout: logoutWithReload
-})(require('../components/UserMenu'));
+})(UserMenuComponent);
 
 const LoginNav = connect((state) => ({
     user: state.security && state.security.user,
@@ -55,7 +56,7 @@ const LoginNav = connect((state) => ({
     onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true, true),
     onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true, true),
     onLogout: logoutWithReload
-})(require('../components/UserMenu'));
+})(UserMenuComponent);
 
 class LoginTool extends React.Component {
     static propTypes = {
@@ -79,8 +80,10 @@ class LoginTool extends React.Component {
         </div>);
     }
 }
-module.exports = {
-    LoginPlugin: assign(LoginTool, {
+
+export default createPlugin('Login', {
+    component: LoginTool,
+    containers: {
         OmniBar: {
             name: "login",
             position: 3,
@@ -88,7 +91,9 @@ module.exports = {
             tools: [UserDetails, PasswordReset, Login],
             priority: 1
         }
-    }),
-    reducers: {security: require('@mapstore/framework/reducers/security')},
-    epics: require('@mapstore/framework/epics/login')
-};
+    },
+    reducers: {
+        security
+    },
+    epics
+});
