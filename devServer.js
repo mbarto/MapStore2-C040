@@ -33,4 +33,4 @@ module.exports = {
             pathRewrite: {'/docs': '/mapstore/docs'}
         }
     }
-}
+};

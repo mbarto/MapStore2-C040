@@ -3,6 +3,16 @@
   "version": "1.2.4",
   "description": "GeoPortale - Comune di Genova",
   "repository": "git@github.com:geosolutions-it/MapStore2-C040.git",
+  "mapstore": {
+    "templateParameters": {
+      "titleApi": "GeoPortale - Comune di Genova",
+      "titleEmbedded": "GeoPortale - Comune di Genova",
+      "titleIndex": "GeoPortale - Comune di Genova",
+      "loadingMessage": "Caricamento MapStore",
+      "loadingMessageEmbedded": "Caricamento MapStore",
+      "favicon": "assets/favicon.ico"
+    }
+  },
   "eslintConfig": {
     "extends": [
       "@mapstore/eslint-config-mapstore"
@@ -17,9 +27,10 @@
     }
   },
   "devDependencies": {
-    "@mapstore/project": "git+https://github.com/geosolutions-it/mapstore-project.git#218f112a481b70a007b2f98dc506be1c0b1b3e42"
+    "@mapstore/project": "1.0.0"
   },
   "dependencies": {
+    "@turf/area": "4.1.0",
     "mapstore": "file:MapStore2"
   },
   "scripts": {
